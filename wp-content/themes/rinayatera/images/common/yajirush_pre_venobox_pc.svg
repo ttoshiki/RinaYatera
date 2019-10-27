@@ -1,0 +1,15 @@
+<svg id="yajirush_pre_venobox_pc.svg" xmlns="http://www.w3.org/2000/svg" width="80" height="25.375" viewBox="0 0 80 25.375">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #b0bbd0;
+      }
+
+      .cls-2 {
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <rect id="長方形_21" data-name="長方形 21" class="cls-1" y="23.375" width="80" height="2"/>
+  <path id="長方形_22" data-name="長方形 22" class="cls-2" d="M1495.13,766.96l23.33-23.334,1.41,1.414-23.33,23.334Z" transform="translate(-1495 -743.625)"/>
+</svg>

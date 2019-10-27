@@ -1,0 +1,16 @@
+<svg id="humberger_menu_main_line.svg" xmlns="http://www.w3.org/2000/svg" width="90" height="10" viewBox="0 0 90 10">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #0f234a;
+      }
+
+      .cls-2 {
+        fill: #09898d;
+      }
+    </style>
+  </defs>
+  <circle id="楕円形_7" data-name="楕円形 7" class="cls-1" cx="85" cy="5" r="5"/>
+  <rect id="長方形_22_のコピー" data-name="長方形 22 のコピー" class="cls-2" x="35" y="4" width="35" height="4"/>
+  <rect id="長方形_22" data-name="長方形 22" class="cls-1" y="4" width="35" height="4"/>
+</svg>
