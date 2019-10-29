@@ -6,7 +6,6 @@ $(window).on('load',function(){
 	 $('.loading-job').delay(500).fadeOut(500);
    setTimeout(function(){ $(".loading").fadeOut(500);},5000);
 	var scroollNum = $(this).scrollTop();
-		console.log(scroollNum);
 		//otherの距離を取得
 		var otherH = 300;
 		// var otherH = $(".photos-subhead").offset().top;
@@ -30,7 +29,6 @@ $(function(){
     //subtitle.hide();
     $(window).scroll(function () {
 		var scroollNum = $(this).scrollTop();
-		console.log(scroollNum);
 		//otherの距離を取得
 		var otherH = 300;
 		var hikaku = otherH -200;

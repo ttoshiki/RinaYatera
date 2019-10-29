@@ -1,8 +1,6 @@
 <?php get_header();?>
 <body <?php body_class(); ?>>
 
-
-
 	<!--main-->
 	<main>
 		<div class="inner">
@@ -13,33 +11,31 @@
 					<div class="photos-inner">
 						<?php
 
-						// The Query
-						$args = array(
-							'post_type' => 'post',
-							'posts_per_page' => -1,
-							'no_found_rows' => true,  //ページャーを使う時はfalseに。
-							'category_name' => 'artist'
-							//論理和：カテゴリースラッグで指定
-						);
-						$the_query = new WP_Query( $args );
+                        // The Query
+                        $args = array(
+                            'post_type' => 'post',
+                            'posts_per_page' => 7,
+                            'no_found_rows' => true,  //ページャーを使う時はfalseに。
+                            'category_name' => 'artist'
+                            //論理和：カテゴリースラッグで指定
+                        );
+                        $the_query = new WP_Query($args);
 
-						// The Loop
-						if ( $the_query->have_posts() ) {
-						?><ul class="photos-thumbnail">
-						<?php while ( $the_query->have_posts() ) {
-						$the_query->the_post();
-						?>
+                        // The Loop
+                        if ($the_query->have_posts()) {
+                            ?><ul class="photos-thumbnail">
+						<?php while ($the_query->have_posts()) {
+                                $the_query->the_post(); ?>
 						<!--PC-->
-
 						<li class="photos pc-img odd photos-hover my-effect">
 							<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-pc">
 							<span class="cover"></span>
-							<?
-								//画像(返り値は「画像ID」)
-								$img = get_field('pc-thumbnail');
-								$imgurl = wp_get_attachment_image_src($img, 'full'); //サイズは自由に変更してね
-								if($imgurl){ ?><img src="<? echo $imgurl[0]; ?>" alt=""></a>
-								<? } ?>
+							<?php
+                                //画像(返り値は「画像ID」)
+                                $img = get_field('pc-thumbnail');
+                                $imgurl = wp_get_attachment_image_src($img, 'full'); //サイズは自由に変更してね
+                                if ($imgurl) { ?><img src="<?php echo $imgurl[0]; ?>" alt=""></a>
+								<?php } ?>
 							<div class="view-more">
 								<p class="view-more__sentense">view more</p>
 							</div>
@@ -47,25 +43,28 @@
 						<!--SP-->
 						<li class="photos sp-img photos-thumbnail my-effect">
 							<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-sp">
-								<?
-									//画像(返り値は「画像ID」)
-									$img = get_field('sp-samuneiru');
-									$imgurl = wp_get_attachment_image_src($img, 'full'); //サイズは自由に変更してね
-									if($imgurl){ ?><img src="<? echo $imgurl[0]; ?>" alt="">
-									<? } ?>
+								<?php
+                                    //画像(返り値は「画像ID」)
+                                    $img = get_field('sp-samuneiru');
+                                $imgurl = wp_get_attachment_image_src($img, 'full'); //サイズは自由に変更してね
+                                if ($imgurl) { ?><img src="<?php echo $imgurl[0]; ?>" alt="">
+									<?php } ?>
 									</a>
 						</li>
-					<?php } ?>
+					<?php
+                            } ?>
+							<li class="photos pc-img odd photos-hover my-effect">
+								<button id="moreLoad">もっと読みこむ</button>
+							</li>
 						</ul>
 						<?php
-						/* Restore original Post Data */
+                        /* Restore original Post Data */
 
-						wp_reset_postdata();
-
-						} else {
-						// no posts found
-						}
-							?>
+                        wp_reset_postdata();
+                        } else {
+                            // no posts found
+                        }
+                            ?>
 					</div>
 						</section>
 </div>
@@ -75,33 +74,32 @@
 							<div class="photos-inner__second-category">
 								<?php
 
-								// The Query
-								$args = array(
-									'post_type' => 'post',
-									'posts_per_page' => -1,
-									'no_found_rows' => true,  //ページャーを使う時はfalseに。
-									'category_name' => 'test'
-									//論理和：カテゴリースラッグで指定
-								);
-								$the_query = new WP_Query( $args );
+                                // The Query
+                                $args = array(
+                                    'post_type' => 'post',
+                                    'posts_per_page' => -1,
+                                    'no_found_rows' => true,  //ページャーを使う時はfalseに。
+                                    'category_name' => 'other'
+                                    //論理和：カテゴリースラッグで指定
+                                );
+                                $the_query = new WP_Query($args);
 
-								// The Loop
-								if ( $the_query->have_posts() ) {
-								?><ul class="photos-thumbnail">
-								<?php while ( $the_query->have_posts() ) {
-								$the_query->the_post();
-								?>
+                                // The Loop
+                                if ($the_query->have_posts()) {
+                                    ?><ul class="photos-thumbnail">
+								<?php while ($the_query->have_posts()) {
+                                        $the_query->the_post(); ?>
 								<!--PC-->
 
 								<li class="photos pc-img odd photos-hover my-effect">
 									<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-pc">
 									<span class="cover"></span>
-									<?
-										//画像(返り値は「画像ID」)
-										$img = get_field('pc-thumbnail');
-										$imgurl = wp_get_attachment_image_src($img, 'full'); //サイズは自由に変更してね
-										if($imgurl){ ?><img src="<? echo $imgurl[0]; ?>" alt=""></a>
-										<? } ?>
+									<?php
+                                        //画像(返り値は「画像ID」)
+                                        $img = get_field('pc-thumbnail');
+                                        $imgurl = wp_get_attachment_image_src($img, 'full'); //サイズは自由に変更してね
+                                        if ($imgurl) { ?><img src="<?php echo $imgurl[0]; ?>" alt=""></a>
+										<?php } ?>
 									<div class="view-more">
 										<p class="view-more__sentense">view more</p>
 									</div>
@@ -109,30 +107,27 @@
 								<!--SP-->
 								<li class="photos sp-img photos-thumbnail my-effect">
 									<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-sp">
-										<?
-											//画像(返り値は「画像ID」)
-											$img = get_field('sp-samuneiru');
-											$imgurl = wp_get_attachment_image_src($img, 'full'); //サイズは自由に変更してね
-											if($imgurl){ ?><img src="<? echo $imgurl[0]; ?>" alt="">
-											<? } ?>
+										<?php
+                                            //画像(返り値は「画像ID」)
+                                            $img = get_field('sp-samuneiru');
+                                        $imgurl = wp_get_attachment_image_src($img, 'full'); //サイズは自由に変更してね
+                                        if ($imgurl) { ?><img src="<?php echo $imgurl[0]; ?>" alt="">
+											<?php } ?>
 											</a>
 								</li>
-							<?php } ?>
+							<?php
+                                    } ?>
 								</ul>
 								<?php
-								/* Restore original Post Data */
+                                /* Restore original Post Data */
 
-								wp_reset_postdata();
-
-								} else {
-								// no posts found
-								}
-									?>
+                                wp_reset_postdata();
+                                } else {
+                                    // no posts found
+                                }
+                                    ?>
 							</div>
 								</section>
-
-
-
 					</div>
 
 				<section>
@@ -185,35 +180,38 @@ $(function(){
 </script>
 
 <script src="<?php echo get_template_directory_uri(); ?>/js/venobox.min.js"></script>
-	<script>
-$(function() {
-    $('.zoomin').venobox({
-        infinigall: true,
-        numeratio: false,
-		arrowsColor: '#FFFFFF',
-		closeBackground: 'rgba(255,255,255,0.1)',
-		closeColor: '#B0BBD0',
-		bgcolor:  '#FFFFFF',
-		overlayColor: 'rgba(255,255,255,0.95)',
-		spinColor: '#09898D',
-		spinner: 'wandering-cubes',
-    });
-});
+<script>
+	$(function() {
+		$('.zoomin').venobox({
+			infinigall: true,
+			numeratio: false,
+			arrowsColor: '#FFFFFF',
+			closeBackground: 'rgba(255,255,255,0.1)',
+			closeColor: '#B0BBD0',
+			bgcolor:  '#FFFFFF',
+			overlayColor: 'rgba(255,255,255,0.95)',
+			spinColor: '#09898D',
+			spinner: 'wandering-cubes',
+		});
+	});
 </script>
+
+
 <script>
 // ユーザーエージェントの判別
 var userAgent = navigator.userAgent;
 
 // スマートフォンの場合はorientationchangeイベントを監視する
 if (userAgent.indexOf("iPhone") >= 0 || userAgent.indexOf("iPad") >= 0 || userAgent.indexOf("Android") >= 0)
-    window.addEventListener("orientationchange", resizeHandler);
+window.addEventListener("orientationchange", resizeHandler);
 else
-    window.addEventListener("resize", resizeHandler);
+window.addEventListener("resize", resizeHandler);
 
 function resizeHandler() {
 }
 </script>
 
+<script src="<?php echo get_template_directory_uri(); ?>/js/style.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/script.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/photos.js"></script>
 

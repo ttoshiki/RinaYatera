@@ -28,7 +28,6 @@
   function log(apiCall) {
     if (!reported && window && window.console) {
       reported = true;
-      console.log("Deprecated TinyMCE API call: " + apiCall);
     }
   }
 
