@@ -53,7 +53,7 @@
 						</li>
 					<?php
                             } ?>
-							<li class="photos pc-img odd photos-hover my-effect">
+							<li id="moreLoadButton">
 								<button id="moreLoad">もっと読みこむ</button>
 							</li>
 						</ul>
@@ -211,7 +211,7 @@ function resizeHandler() {
 }
 </script>
 
-<script src="<?php echo get_template_directory_uri(); ?>/js/style.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/moreLoad.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/script.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/photos.js"></script>
 
