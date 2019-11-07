@@ -23,19 +23,14 @@
 
                         // The Loop
                         if ($the_query->have_posts()) {
-                            ?><ul class="photos-thumbnail">
+                            ?><ul class="photos-thumbnail" id="artist-list">
 						<?php while ($the_query->have_posts()) {
                                 $the_query->the_post(); ?>
 						<!--PC-->
 						<li class="photos pc-img odd photos-hover my-effect">
 							<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-pc">
 							<span class="cover"></span>
-							<?php
-                                //画像(返り値は「画像ID」)
-                                $img = get_field('pc-thumbnail');
-                                $imgurl = wp_get_attachment_image_src($img, 'full'); //サイズは自由に変更してね
-                                if ($imgurl) { ?><img src="<?php echo $imgurl[0]; ?>" alt=""></a>
-								<?php } ?>
+							<img src="<?php echo get_field('pc-thumbnail'); ?>" alt=""></a>
 							<div class="view-more">
 								<p class="view-more__sentense">view more</p>
 							</div>
@@ -43,18 +38,13 @@
 						<!--SP-->
 						<li class="photos sp-img photos-thumbnail my-effect">
 							<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-sp">
-								<?php
-                                    //画像(返り値は「画像ID」)
-                                    $img = get_field('sp-samuneiru');
-                                $imgurl = wp_get_attachment_image_src($img, 'full'); //サイズは自由に変更してね
-                                if ($imgurl) { ?><img src="<?php echo $imgurl[0]; ?>" alt="">
-									<?php } ?>
+                                	<img src="<?php echo get_field('sp-samuneiru'); ?>" alt="">
 									</a>
 						</li>
 					<?php
                             } ?>
-							<li id="moreLoadButton">
-								<button id="moreLoad">もっと読みこむ</button>
+							<li id="moreLoad">
+								<button id="moreLoadButton">もっと読みこむ</button>
 							</li>
 						</ul>
 						<?php
@@ -94,12 +84,7 @@
 								<li class="photos pc-img odd photos-hover my-effect">
 									<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-pc">
 									<span class="cover"></span>
-									<?php
-                                        //画像(返り値は「画像ID」)
-                                        $img = get_field('pc-thumbnail');
-                                        $imgurl = wp_get_attachment_image_src($img, 'full'); //サイズは自由に変更してね
-                                        if ($imgurl) { ?><img src="<?php echo $imgurl[0]; ?>" alt=""></a>
-										<?php } ?>
+									<img src="<?php echo get_field('pc-thumbnail'); ?>" alt="">
 									<div class="view-more">
 										<p class="view-more__sentense">view more</p>
 									</div>
@@ -107,13 +92,8 @@
 								<!--SP-->
 								<li class="photos sp-img photos-thumbnail my-effect">
 									<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-sp">
-										<?php
-                                            //画像(返り値は「画像ID」)
-                                            $img = get_field('sp-samuneiru');
-                                        $imgurl = wp_get_attachment_image_src($img, 'full'); //サイズは自由に変更してね
-                                        if ($imgurl) { ?><img src="<?php echo $imgurl[0]; ?>" alt="">
-											<?php } ?>
-											</a>
+										<img src="<?php echo get_field('sp-samuneiru'); ?>" alt="">
+									</a>
 								</li>
 							<?php
                                     } ?>
