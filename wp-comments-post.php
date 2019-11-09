@@ -16,7 +16,6 @@ if ( 'POST' != $_SERVER['REQUEST_METHOD'] ) {
 	header( 'Content-Type: text/plain' );
 	exit;
 }
-
 /** Sets up the WordPress Environment. */
 require( dirname( __FILE__ ) . '/wp-load.php' );
 
