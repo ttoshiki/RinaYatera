@@ -1,6 +1,7 @@
 
 let now_post_num = 6
-let get_post_num = now_post_num + 6
+let get_post_num = 4
+let total_post_num = now_post_num + get_post_num
 let isFirst = true
 let getJSONResults = []
 const buttonHtml = '<li id="moreLoadButton"><button id="moreLoad">もっと読みこむ</button></li>'
@@ -11,9 +12,27 @@ $("#artist-list").on("click", "#moreLoad", function() {
             console.log(now_post_num)
             getJSONResults = results
             isFirst = false
-            rangeToRoad = getJSONResults.slice(now_post_num + 1, get_post_num)
+            rangeToRoad = getJSONResults.slice(now_post_num + 1, total_post_num)
             console.log(rangeToRoad)
              $('#moreLoad').remove()
+            $.each(rangeToRoad, function(i, item) {
+                thumbnailUrl = item['_embedded']['wp:featuredmedia']['0']['media_details']['sizes']['full']['source_url']
+                pcThumnailUrl = item['acf']['pc-thumbnail']
+                let outputHtml = '<li class="photos pc-img odd photos-hover my-effect"><a href="' + thumbnailUrl + '" class="zoomin" data-gall="artist-pc">'
+                outputHtml += `<span class="cover"></span>`
+                outputHtml += '<img src="' + pcThumnailUrl + '" alt=""></a>'
+
+                $("#artist-list").append(outputHtml);
+            });
+            $("#artist-list").append(buttonHtml);
+            now_post_num += get_post_num
+            total_post_num += get_post_num
+        });
+    } else {
+        rangeToRoad = getJSONResults.slice(now_post_num + 1, total_post_num)
+        console.log(rangeToRoad.length)
+        console.log('get_post_num= ' + get_post_num)
+            $('#moreLoad').remove()
             $.each(rangeToRoad, function(i, item) {
                 thumbnailUrl = item['_embedded']['wp:featuredmedia']['0']['media_details']['sizes']['full']['source_url']
                 pcThumnailUrl = item['acf']['pc-thumbnail']
@@ -24,26 +43,10 @@ $("#artist-list").on("click", "#moreLoad", function() {
 
                 $("#artist-list").append(outputHtml);
             });
-            $("#artist-list").append(buttonHtml);
-            now_post_num += 6
-            get_post_num += 6
-        });
-    } else {
-        rangeToRoad = getJSONResults.slice(now_post_num + 1, get_post_num)
-        console.log(rangeToRoad)
-        $('#moreLoad').remove()
-        $.each(rangeToRoad, function(i, item) {
-            thumbnailUrl = item['_embedded']['wp:featuredmedia']['0']['media_details']['sizes']['full']['source_url']
-            pcThumnailUrl = item['acf']['pc-thumbnail']
-
-            let outputHtml = '<li class="photos pc-img odd photos-hover my-effect"><a href="' + thumbnailUrl + '" class="zoomin" data-gall="artist-pc">'
-            outputHtml += `<span class="cover"></span>`
-            outputHtml += '<img src="' + pcThumnailUrl + '" alt=""></a>'
-
-            $("#artist-list").append(outputHtml);
-        });
-        $("#artist-list").append(buttonHtml);
-        now_post_num += 6
-        get_post_num += 6
+            if(rangeToRoad.length >= get_post_num - 1) {
+                $("#artist-list").append(buttonHtml);
+                now_post_num += get_post_num
+                total_post_num += get_post_num
+            }
     }
 });
