@@ -78,3 +78,4 @@ $location = apply_filters( 'comment_post_redirect', $location, $comment );
 
 wp_safe_redirect( $location );
 exit;
+
