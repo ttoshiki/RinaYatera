@@ -177,7 +177,7 @@ $(function () {
 	 setTimeout(function(){
 		 $('.plan-animation__top').css('opacity','1').textillate({
           in: {
-            effect: '',
+            effect: 'fadeIn',
             shuffle: false,
             delay: 50,
             delayScale: 1.5,
