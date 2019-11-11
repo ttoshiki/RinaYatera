@@ -82,7 +82,7 @@
 								<!--PC-->
 
 								<li class="photos pc-img odd photos-hover my-effect">
-									<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-pc">
+									<a href=" <?php echo get_the_post_thumbnail_url()?>" class="zoomin" data-gall="artist-pc">
 									<span class="cover"></span>
 									<img src="<?php echo get_field('pc-thumbnail'); ?>" alt="">
 									<div class="view-more">

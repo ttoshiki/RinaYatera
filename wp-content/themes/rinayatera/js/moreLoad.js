@@ -4,11 +4,22 @@ let get_post_num = 4
 let total_post_num = now_post_num + get_post_num
 let isFirst = true
 let getJSONResults = []
-const buttonHtml = '<li id="moreLoadButton"><button id="moreLoad">もっと読みこむ</button></li>'
+let buttonText = ''
+
+if (userAgent.indexOf("iPhone") >= 0 || userAgent.indexOf("iPad") >= 0 || userAgent.indexOf("Android") >= 0) {
+    buttonText += 'TAP '
+} else {
+    window.addEventListener("resize", resizeHandler);
+    buttonText += 'CLICK '
+}
+buttonText += 'FOR MORE'
+const buttonHtml = '<li id="moreLoadButton"><button id="moreLoad">' + buttonText + '</button></li>'
 
 $("#artist-list").on("click", "#moreLoad", function() {
+    const evenTransitionSpeed = 1200;
+    const oddTransitionSpeed = 600;
     if(isFirst) {
-        $.getJSON( "http://rinayatera.com/wp/wp-json/wp/v2/posts?_embed&categories=3&per_page=100", function(results) {
+        $.getJSON( "//rinayatera.com/wp/wp-json/wp/v2/posts?_embed&categories=3&per_page=100", function(results) {
             console.log(now_post_num)
             getJSONResults = results
             isFirst = false
@@ -18,12 +29,18 @@ $("#artist-list").on("click", "#moreLoad", function() {
             $.each(rangeToRoad, function(i, item) {
                 thumbnailUrl = item['_embedded']['wp:featuredmedia']['0']['media_details']['sizes']['full']['source_url']
                 pcThumnailUrl = item['acf']['pc-thumbnail']
-                let outputHtml = '<li class="photos pc-img odd photos-hover my-effect"><a href="' + thumbnailUrl + '" class="zoomin" data-gall="artist-pc">'
+                let outputHtml = '<li class="photos pc-img photos-hover addDom"><a href="' + thumbnailUrl + '" class="zoomin" data-gall="artist-pc">'
                 outputHtml += `<span class="cover"></span>`
                 outputHtml += '<img src="' + pcThumnailUrl + '" alt=""></a>'
-
-                $("#artist-list").append(outputHtml);
+                // $("#artist-list").append(outputHtml);
+                $(outputHtml).appendTo("#artist-list").hide()
             });
+            $('.addDom:even').css({ position: 'relative', top: 20, opacity: 0, transition: evenTransitionSpeed + 'ms'});
+            $('.addDom:odd').css({ position: 'relative', top: 20, opacity: 0, transition: oddTransitionSpeed + 'ms'});
+            $('.addDom').fadeIn(600).animate({
+                top: 0,
+                opacity: 1
+            },600)
             $("#artist-list").append(buttonHtml);
             now_post_num += get_post_num
             total_post_num += get_post_num
@@ -31,18 +48,23 @@ $("#artist-list").on("click", "#moreLoad", function() {
     } else {
         rangeToRoad = getJSONResults.slice(now_post_num + 1, total_post_num)
         console.log(rangeToRoad.length)
-        console.log('get_post_num= ' + get_post_num)
             $('#moreLoad').remove()
             $.each(rangeToRoad, function(i, item) {
                 thumbnailUrl = item['_embedded']['wp:featuredmedia']['0']['media_details']['sizes']['full']['source_url']
                 pcThumnailUrl = item['acf']['pc-thumbnail']
 
-                let outputHtml = '<li class="photos pc-img odd photos-hover my-effect"><a href="' + thumbnailUrl + '" class="zoomin" data-gall="artist-pc">'
+                let outputHtml = '<li class="photos pc-img photos-hover addDom"><a href="' + thumbnailUrl + '" class="zoomin" data-gall="artist-pc">'
                 outputHtml += `<span class="cover"></span>`
                 outputHtml += '<img src="' + pcThumnailUrl + '" alt=""></a>'
 
-                $("#artist-list").append(outputHtml);
+                $(outputHtml).appendTo("#artist-list").hide()
             });
+            $('.addDom:even').css({ position: 'relative', top: 20, opacity: 0, transition: evenTransitionSpeed + 'ms'});
+            $('.addDom:odd').css({ position: 'relative', top: 20, opacity: 0, transition: oddTransitionSpeed + 'ms'});
+            $('.addDom').fadeIn(600).animate({
+                top: 0,
+                opacity: 1
+            },600)
             if(rangeToRoad.length >= get_post_num - 1) {
                 $("#artist-list").append(buttonHtml);
                 now_post_num += get_post_num
