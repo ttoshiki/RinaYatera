@@ -43,7 +43,7 @@
 						</li>
 					<?php
                             } ?>
-							<li id="moreLoad">
+							<li id="moreLoad" class="photos photos-thumbnail my-effect">
 								<button id="moreLoadButton">もっと読みこむ</button>
 							</li>
 						</ul>

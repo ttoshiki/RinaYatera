@@ -26,12 +26,14 @@ $("#artist-list").on("click", "#moreLoad", function() {
             rangeToRoad = getJSONResults.slice(now_post_num + 1, total_post_num)
             console.log(rangeToRoad)
              $('#moreLoad').remove()
+             $('#moreLoadButton').remove()
             $.each(rangeToRoad, function(i, item) {
                 thumbnailUrl = item['_embedded']['wp:featuredmedia']['0']['media_details']['sizes']['full']['source_url']
                 pcThumnailUrl = item['acf']['pc-thumbnail']
                 let outputHtml = '<li class="photos pc-img photos-hover addDom"><a href="' + thumbnailUrl + '" class="zoomin" data-gall="artist-pc">'
                 outputHtml += `<span class="cover"></span>`
                 outputHtml += '<img src="' + pcThumnailUrl + '" alt=""></a>'
+                outputHtml += '<div class="view-more"><p class="view-more__sentense">view more</p></div></li>'
                 // $("#artist-list").append(outputHtml);
                 $(outputHtml).appendTo("#artist-list").hide()
             });
@@ -49,6 +51,7 @@ $("#artist-list").on("click", "#moreLoad", function() {
         rangeToRoad = getJSONResults.slice(now_post_num + 1, total_post_num)
         console.log(rangeToRoad.length)
             $('#moreLoad').remove()
+            $('#moreLoadButton').remove()
             $.each(rangeToRoad, function(i, item) {
                 thumbnailUrl = item['_embedded']['wp:featuredmedia']['0']['media_details']['sizes']['full']['source_url']
                 pcThumnailUrl = item['acf']['pc-thumbnail']
@@ -56,6 +59,7 @@ $("#artist-list").on("click", "#moreLoad", function() {
                 let outputHtml = '<li class="photos pc-img photos-hover addDom"><a href="' + thumbnailUrl + '" class="zoomin" data-gall="artist-pc">'
                 outputHtml += `<span class="cover"></span>`
                 outputHtml += '<img src="' + pcThumnailUrl + '" alt=""></a>'
+                outputHtml += '<div class="view-more"><p class="view-more__sentense">view more</p></div></li>'
 
                 $(outputHtml).appendTo("#artist-list").hide()
             });
