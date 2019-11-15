@@ -161,18 +161,20 @@ $(function(){
 
 <script src="<?php echo get_template_directory_uri(); ?>/js/venobox.min.js"></script>
 <script>
-	$(function venobox() {
-		$('.zoomin').venobox({
-			infinigall: true,
-			numeratio: false,
-			arrowsColor: '#FFFFFF',
-			closeBackground: 'rgba(255,255,255,0.1)',
-			closeColor: '#B0BBD0',
-			bgcolor:  '#FFFFFF',
-			overlayColor: 'rgba(255,255,255,0.95)',
-			spinColor: '#09898D',
-			spinner: 'wandering-cubes',
-		});
+	$(function() {
+		let venoBox = function doVenoBox() {
+			$('.zoomin').venobox({
+				infinigall: true,
+				numeratio: false,
+				arrowsColor: '#FFFFFF',
+				closeBackground: 'rgba(255,255,255,0.1)',
+				closeColor: '#B0BBD0',
+				bgcolor:  '#FFFFFF',
+				overlayColor: 'rgba(255,255,255,0.95)',
+				spinColor: '#09898D',
+				spinner: 'wandering-cubes',
+			}());
+		}
 	});
 </script>
 
