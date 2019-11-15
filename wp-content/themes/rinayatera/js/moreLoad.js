@@ -20,11 +20,9 @@ $("#artist-list").on("click", "#moreLoad", function() {
     const oddTransitionSpeed = 600;
     if(isFirst) {
         $.getJSON( "//rinayatera.com/wp/wp-json/wp/v2/posts?_embed&categories=3&per_page=100", function(results) {
-            console.log(now_post_num)
             getJSONResults = results
             isFirst = false
             rangeToRoad = getJSONResults.slice(now_post_num + 1, total_post_num)
-            console.log(rangeToRoad)
              $('#moreLoad').remove()
              $('#moreLoadButton').remove()
             $.each(rangeToRoad, function(i, item) {
@@ -46,10 +44,20 @@ $("#artist-list").on("click", "#moreLoad", function() {
             $("#artist-list").append(buttonHtml);
             now_post_num += get_post_num
             total_post_num += get_post_num
+            $('.zoomin').venobox({
+                infinigall: true,
+                numeratio: false,
+                arrowsColor: '#FFFFFF',
+                closeBackground: 'rgba(255,255,255,0.1)',
+                closeColor: '#B0BBD0',
+                bgcolor:  '#FFFFFF',
+                overlayColor: 'rgba(255,255,255,0.95)',
+                spinColor: '#09898D',
+                spinner: 'wandering-cubes',
+            });
         });
     } else {
         rangeToRoad = getJSONResults.slice(now_post_num + 1, total_post_num)
-        console.log(rangeToRoad.length)
             $('#moreLoad').remove()
             $('#moreLoadButton').remove()
             $.each(rangeToRoad, function(i, item) {
@@ -74,5 +82,16 @@ $("#artist-list").on("click", "#moreLoad", function() {
                 now_post_num += get_post_num
                 total_post_num += get_post_num
             }
+            $('.zoomin').venobox({
+                infinigall: true,
+                numeratio: false,
+                arrowsColor: '#FFFFFF',
+                closeBackground: 'rgba(255,255,255,0.1)',
+                closeColor: '#B0BBD0',
+                bgcolor:  '#FFFFFF',
+                overlayColor: 'rgba(255,255,255,0.95)',
+                spinColor: '#09898D',
+                spinner: 'wandering-cubes',
+		    });
     }
 });

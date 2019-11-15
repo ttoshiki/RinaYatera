@@ -27,7 +27,7 @@
 						<?php while ($the_query->have_posts()) {
                                 $the_query->the_post(); ?>
 						<!--PC-->
-						<li class="photos pc-img odd photos-hover my-effect">
+						<li class="photos pc-img photos-hover my-effect">
 							<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-pc">
 							<span class="cover"></span>
 							<img src="<?php echo get_field('pc-thumbnail'); ?>" alt=""></a>
@@ -161,7 +161,7 @@ $(function(){
 
 <script src="<?php echo get_template_directory_uri(); ?>/js/venobox.min.js"></script>
 <script>
-	$(function() {
+	$(function venobox() {
 		$('.zoomin').venobox({
 			infinigall: true,
 			numeratio: false,
