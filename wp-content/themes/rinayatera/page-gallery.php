@@ -60,7 +60,7 @@
 </div>
 						<section class="photos photos-background-color photos-subhead" id="other">
 							<div class="inner photos">
-							<h2 class="photos lowpage_h2__second-category">other</h2>
+							<h2 class="photos my-effect lowpage_h2__second-category">other</h2>
 							<div class="photos-inner__second-category">
 								<?php
 
@@ -81,7 +81,7 @@
                                         $the_query->the_post(); ?>
 								<!--PC-->
 
-								<li class="photos pc-img odd photos-hover my-effect">
+								<li class="photos pc-img photos-hover my-effect">
 									<a href=" <?php echo get_the_post_thumbnail_url()?>" class="zoomin" data-gall="artist-pc">
 									<span class="cover"></span>
 									<img src="<?php echo get_field('pc-thumbnail'); ?>" alt="">

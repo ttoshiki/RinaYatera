@@ -21,9 +21,9 @@ let venoBox = function() {
 venoBox()
 
 let addPhotosDom = function() {
-    const evenTransitionSpeed = 1200;
-    const oddTransitionSpeed = 600;
-    const fadeInSpeed = 200
+    const evenTransitionSpeed = 1600;
+    const oddTransitionSpeed = 800;
+    const fadeInSpeed = 100
     rangeToRoad = getJSONResults.slice(now_post_num + 1, total_post_num)
     $('#moreLoad').remove()
     $('#moreLoadButton').remove()
@@ -41,7 +41,7 @@ let addPhotosDom = function() {
     $('.addDom').fadeIn(fadeInSpeed).animate({
         top: 0,
         opacity: 1
-    },600)
+    },200)
     venoBox()
 }
 
