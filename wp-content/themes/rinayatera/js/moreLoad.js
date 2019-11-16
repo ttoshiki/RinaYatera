@@ -18,8 +18,9 @@ let venoBox = function() {
         spinner: 'wandering-cubes',
     });
 }
+venoBox()
 
-let addPhotosDom = function(now_post_num, get_post_num, total_post_num, getJSONResults) {
+let addPhotosDom = function() {
     const evenTransitionSpeed = 1200;
     const oddTransitionSpeed = 600;
     const fadeInSpeed = 200
@@ -60,13 +61,13 @@ $("#artist-list").on("click", "#moreLoad", function() {
         $.getJSON( "//rinayatera.com/wp/wp-json/wp/v2/posts?_embed&categories=3&per_page=100", function(results) {
             getJSONResults = results
             isFirst = false
-            addPhotosDom(now_post_num, get_post_num, total_post_num, getJSONResults)
+            addPhotosDom()
             now_post_num += get_post_num
             total_post_num += get_post_num
             $("#artist-list").append(buttonHtml);
         });
     } else {
-        addPhotosDom(now_post_num, get_post_num, total_post_num, getJSONResults)
+        addPhotosDom()
         if(rangeToRoad.length >= get_post_num - 1) {
             $("#artist-list").append(buttonHtml);
             now_post_num += get_post_num

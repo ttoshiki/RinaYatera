@@ -127,7 +127,6 @@
 	<!--//main-->
 
 
-
 	<!--footer-->
 	<footer class="footer-lowpage inner">
 		<div class="inner">
@@ -135,16 +134,6 @@
 		</div>
 	</footer>
 	<!--//footer-->
-	<script>
-		var ua = navigator.userAgent;
-		if ((ua.indexOf('iPhone') > 0) || ua.indexOf('iPod') > 0 || (ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0)) {
-			// スマホのとき
-			$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />');
-		}else{
-			// PC・タブレットのとき
-			$('head').prepend('<meta name="viewport" content="width=1200" />');
-		}
-</script>
 
 <script type="text/javascript">
 $(function(){
@@ -160,34 +149,17 @@ $(function(){
 </script>
 
 <script src="<?php echo get_template_directory_uri(); ?>/js/venobox.min.js"></script>
-<script>
-	$(function() {
-		let venoBox = function doVenoBox() {
-			$('.zoomin').venobox({
-				infinigall: true,
-				numeratio: false,
-				arrowsColor: '#FFFFFF',
-				closeBackground: 'rgba(255,255,255,0.1)',
-				closeColor: '#B0BBD0',
-				bgcolor:  '#FFFFFF',
-				overlayColor: 'rgba(255,255,255,0.95)',
-				spinColor: '#09898D',
-				spinner: 'wandering-cubes',
-			}());
-		}
-	});
-</script>
-
 
 <script>
-// ユーザーエージェントの判別
 var userAgent = navigator.userAgent;
-
 // スマートフォンの場合はorientationchangeイベントを監視する
-if (userAgent.indexOf("iPhone") >= 0 || userAgent.indexOf("iPad") >= 0 || userAgent.indexOf("Android") >= 0)
-window.addEventListener("orientationchange", resizeHandler);
-else
-window.addEventListener("resize", resizeHandler);
+if (userAgent.indexOf("iPhone") >= 0 || userAgent.indexOf("iPad") >= 0 || userAgent.indexOf("Android") >= 0) {
+	window.addEventListener("orientationchange", resizeHandler);
+	$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />');
+} else {
+	window.addEventListener("resize", resizeHandler);
+	$('head').prepend('<meta name="viewport" content="width=1200" />');
+}
 
 function resizeHandler() {
 }
