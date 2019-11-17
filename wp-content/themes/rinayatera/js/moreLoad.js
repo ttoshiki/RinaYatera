@@ -20,6 +20,8 @@ let venoBox = function() {
 }
 venoBox()
 
+const vboxPreloadImage = '<div class="vbox-preloader"><div class="sk-wandering-cubes -gallery"><div class="sk-cube sk-cube1 -gallery" style="background-color: rgb(9, 137, 141);"></div><div class="sk-cube sk-cube2 -gallery" style="background-color: rgb(9, 137, 141);"></div></div></div>'
+
 let addPhotosDom = function() {
     const evenTransitionSpeed = 1600;
     const oddTransitionSpeed = 800;
@@ -53,9 +55,11 @@ if (userAgent.indexOf("iPhone") >= 0 || userAgent.indexOf("iPad") >= 0 || userAg
     buttonText += 'CLICK '
 }
 buttonText += 'FOR MORE'
-const buttonHtml = '<li id="moreLoadButton"><button id="moreLoad">' + buttonText + '</button></li>'
+const buttonHtml = '<li class="photos pc-img photos-thumbnail addDom" id="moreLoad"><button id="moreLoadButton"><span class="moreLoadButton__text">CLICK<br>FOR MORE</span></button></li>'
 
 $("#artist-list").on("click", "#moreLoad", function() {
+    $('.moreLoadButton__text').text('LOADING')
+    $('.moreLoadButton__text').append(vboxPreloadImage)
     $('#moreLoadButton').prop("disabled", true)
     if(isFirst) {
         $.getJSON( "//rinayatera.com/wp/wp-json/wp/v2/posts?_embed&categories=3&per_page=100", function(results) {

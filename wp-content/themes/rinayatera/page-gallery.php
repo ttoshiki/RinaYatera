@@ -43,8 +43,8 @@
 						</li>
 					<?php
                             } ?>
-							<li id="moreLoad" class="photos photos-thumbnail my-effect">
-								<button id="moreLoadButton">もっと読みこむ</button>
+							<li class="photos pc-img photos-thumbnail my-effect" id="moreLoad">
+								<button id="moreLoadButton"><span class="moreLoadButton__text">CLICK<br>FOR MORE</span></button>
 							</li>
 						</ul>
 						<?php
@@ -76,7 +76,7 @@
 
                                 // The Loop
                                 if ($the_query->have_posts()) {
-                                    ?><ul class="photos-thumbnail">
+                                    ?><ul class="photos-thumbnail" id="other-list">
 								<?php while ($the_query->have_posts()) {
                                         $the_query->the_post(); ?>
 								<!--PC-->
@@ -156,9 +156,11 @@ var userAgent = navigator.userAgent;
 if (userAgent.indexOf("iPhone") >= 0 || userAgent.indexOf("iPad") >= 0 || userAgent.indexOf("Android") >= 0) {
 	window.addEventListener("orientationchange", resizeHandler);
 	$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />');
+	$('.moreLoadButton__text').html('TAP<br>FOR MORE')
 } else {
 	window.addEventListener("resize", resizeHandler);
 	$('head').prepend('<meta name="viewport" content="width=1200" />');
+	$('.moreLoadButton__text').html('CLICK<br>FOR MORE')
 }
 
 function resizeHandler() {
