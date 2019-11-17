@@ -101,17 +101,21 @@
       <div class="nav-background">
           <nav class="navigation">
             <ul class="nav-list">
-              <?php wp_nav_menu( array( 'items_wrap' => '%3$s' ) ); ?>
-              <?php
-$defaults = array(
-	'menu_class'      => 'nav-list',
-	'container'       => 'div',
-	'echo'            => true,
-	'depth'           => 2,
-	'walker'          => '',
-);
-wp_nav_menu( $defaults );
-?>
+
+    <?php 
+      wp_nav_menu( array( 
+        'theme_location' => 'grobal_navugation',
+        'menu_class'      => 'nav-list',
+        'container'       => false,
+        'echo'            => true,
+        'depth'           => 0,
+      ) ); 
+    ?>
+      </ul>
+
+
+
+</nav>
       </div>
     </div>
   <!--//navigation-->
