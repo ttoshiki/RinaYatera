@@ -1,3 +1,7 @@
+const VBOX_PRELOAD_IMAGE = '<div class="vbox-preloader"><div class="sk-wandering-cubes -gallery"><div class="sk-cube sk-cube1 -gallery" style="background-color: rgb(9, 137, 141);"></div><div class="sk-cube sk-cube2 -gallery" style="background-color: rgb(9, 137, 141);"></div></div></div>'
+const EVEN_TRANSITION_SPEED = 1600;
+const ODD_TRANTISION_SPEED = 800;
+const FADE_IN_SPEED = 100
 let now_post_num = 6
 let get_post_num = 6
 let total_post_num = now_post_num + get_post_num - 1
@@ -20,12 +24,7 @@ let venoBox = function() {
 }
 venoBox()
 
-const VBOX_PRELOAD_IMAGE = '<div class="vbox-preloader"><div class="sk-wandering-cubes -gallery"><div class="sk-cube sk-cube1 -gallery" style="background-color: rgb(9, 137, 141);"></div><div class="sk-cube sk-cube2 -gallery" style="background-color: rgb(9, 137, 141);"></div></div></div>'
-
 let addPhotosDom = function() {
-    const EVEN_TRANSITION_SPEED = 1600;
-    const ODD_TRANTISION_SPEED = 800;
-    const FADE_IN_SPEED = 100
     rangeToRoad = getJSONResults.slice(now_post_num + 1, total_post_num)
     $('#moreLoad').fadeOut(200, function() { $(this).remove(); })
     $('#moreLoadButton').fadeOut(200, function() { $(this).remove(); })
@@ -47,6 +46,14 @@ let addPhotosDom = function() {
     venoBox()
 }
 
+let addForMoreButton = function() {
+    $(BUTTON_HTML).appendTo("#artist-list").fadeOut(0, function() {
+        $(this).css({ position: 'relative', top: 20, opacity: 0, transition: EVEN_TRANSITION_SPEED + 'ms'}).fadeIn(FADE_IN_SPEED).animate({
+            top: 0,
+            opacity: 1
+        },300)
+    })
+}
 
 if (userAgent.indexOf("iPhone") >= 0 || userAgent.indexOf("iPad") >= 0 || userAgent.indexOf("Android") >= 0) {
     buttonText += 'TAP '
@@ -68,12 +75,12 @@ $("#artist-list").on("click", "#moreLoad", function() {
             addPhotosDom()
             now_post_num += get_post_num
             total_post_num += get_post_num
-            $("#artist-list").append(BUTTON_HTML);
+            addForMoreButton()
         });
     } else {
         addPhotosDom()
         if(rangeToRoad.length >= get_post_num - 1) {
-            $("#artist-list").append(BUTTON_HTML);
+            addForMoreButton()
             now_post_num += get_post_num
             total_post_num += get_post_num
         }
