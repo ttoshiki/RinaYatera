@@ -7,7 +7,7 @@ let get_post_num = 6
 let total_post_num = now_post_num + get_post_num - 1
 let isFirst = true
 let getJSONResults = []
-let buttonText = ''
+let forMoreButtonText = ''
 let rangeToRoad = []
 let venoBox = function() {
     $('.zoomin').venobox({
@@ -26,8 +26,8 @@ venoBox()
 
 let addPhotosDom = function() {
     rangeToRoad = getJSONResults.slice(now_post_num + 1, total_post_num)
-    $('#moreLoad').fadeOut(200, function() { $(this).remove(); })
-    $('#moreLoadButton').fadeOut(200, function() { $(this).remove(); })
+    $('#moreLoad').fadeOut(150, function() { $(this).remove(); })
+    $('#moreLoadButton').fadeOut(150, function() { $(this).remove(); })
     $.each(rangeToRoad, function(i, item) {
         thumbnailUrl = item['_embedded']['wp:featuredmedia']['0']['media_details']['sizes']['full']['source_url']
         pcThumnailUrl = item['acf']['pc-thumbnail']
@@ -42,7 +42,7 @@ let addPhotosDom = function() {
     $('.addDom').fadeIn(FADE_IN_SPEED).animate({
         top: 0,
         opacity: 1
-    },300)
+    },450)
     venoBox()
 }
 
@@ -56,12 +56,12 @@ let addForMoreButton = function() {
 }
 
 if (userAgent.indexOf("iPhone") >= 0 || userAgent.indexOf("iPad") >= 0 || userAgent.indexOf("Android") >= 0) {
-    buttonText += 'TAP '
+    forMoreButtonText += 'TAP '
 } else {
     window.addEventListener("resize", resizeHandler);
-    buttonText += 'CLICK '
+    forMoreButtonText += 'CLICK '
 }
-buttonText += 'FOR MORE'
+forMoreButtonText += 'FOR MORE'
 const BUTTON_HTML = '<li class="photos pc-img photos-thumbnail addDom" id="moreLoad"><button id="moreLoadButton"><span class="moreLoadButton__text">CLICK<br>FOR MORE</span></button></li>'
 
 $("#artist-list").on("click", "#moreLoad", function() {
