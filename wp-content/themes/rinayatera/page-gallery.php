@@ -167,6 +167,7 @@ function resizeHandler() {
 }
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.0.1/dist/gsap.min.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/moreLoad.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/script.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/photos.js"></script>

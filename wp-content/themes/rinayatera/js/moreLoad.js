@@ -25,17 +25,23 @@ let venoBox = function() {
 venoBox()
 
 let addPhotosDom = function() {
-    if((now_post_num) < getJSONResults.length) {
+    // 記事の総数より現在の表示記事数が少なかったら読み込む記事数だけ読む
+    if(now_post_num < getJSONResults.length) {
         rangeToRoad = getJSONResults.slice(now_post_num, (now_post_num + get_post_num))
+    // 記事の総数より現在の表示記事数が多い、または同じ時は記事の最後まで読み込む
     } else {
         console.log('now_post_num', now_post_num)
         rangeToRoad = getJSONResults.slice(now_post_num - 1, getJSONResults.length)
     }
     rangeToRoad = getJSONResults.slice(now_post_num, (now_post_num + get_post_num))
-    $('#moreLoad').fadeOut(150, function() { $(this).remove(); })
-    $('#moreLoadButton').fadeOut(150, function() { $(this).remove(); })
+    let addDomAnimation = new TimelineMax()
+    addDomAnimation.to('#moreLoad', 0.15, {
+        opacity: 0,
+    }).to('#moreLoad', 0.01, {
+        display: 'none',
+        onComplete: fadeIn
+    });
     $.each(rangeToRoad, function(i, item) {
-        console.log(rangeToRoad.length)
         thumbnailUrl = item['_embedded']['wp:featuredmedia']['0']['media_details']['sizes']['full']['source_url']
         pcThumnailUrl = item['acf']['pc-thumbnail']
         let outputHtml = '<li class="photos pc-img photos-hover addDom"><a href="' + thumbnailUrl + '" class="zoomin" data-gall="artist-pc">'
@@ -46,20 +52,26 @@ let addPhotosDom = function() {
     });
     $('.addDom:even').css({ position: 'relative', top: 20, opacity: 0, transition: EVEN_TRANSITION_SPEED + 'ms'}).addClass('even');
     $('.addDom:odd').css({ position: 'relative', top: 20, opacity: 0, transition: ODD_TRANTISION_SPEED + 'ms'}).addClass('odd');
-    $('.addDom').toggleClass('last');
-    $('.addDom:even').fadeIn(FADE_IN_SPEED).animate({
-        top: 0,
-        opacity: 1
-    },450)
+    function fadeIn() {
+        $('.addDom').fadeIn(FADE_IN_SPEED).animate({
+            top: 0,
+            opacity: 1
+        },450)
+        $('#moreLoad').fadeOut(150, function() { $(this).remove(); })
+        $('#moreLoadButton').fadeOut(150, function() { $(this).remove(); })
+    }
     venoBox()
 }
 
 let addForMoreButton = function() {
-    $(BUTTON_HTML).appendTo("#artist-list").fadeOut(0, function() {
-        $(this).css({ position: 'relative', top: 20, opacity: 0, transition: EVEN_TRANSITION_SPEED + 'ms'}).fadeIn(FADE_IN_SPEED).animate({
-            top: 0,
-            opacity: 1
-        },300)
+    $(BUTTON_HTML).appendTo("#artist-list").fadeOut(0)
+    let addButtonAnimation = new TimelineMax()
+    addButtonAnimation.to('#moreLoad', 0.01, {
+        position: 'relative', top: 20, opacity: 0, transition: EVEN_TRANSITION_SPEED + 'ms'
+    }).to('#moreLoad', 0.45, {
+        opacity: 1,
+        delay: 0.5,
+        top: 0
     })
 }
 
