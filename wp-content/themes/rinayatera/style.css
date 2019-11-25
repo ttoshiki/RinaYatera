@@ -747,12 +747,12 @@ gallery works
   box-sizing: border-box;
 }
 
-.photos.sp-img.odd {
+.photos.sp-img:nth-child(2n) {
   padding-right: 6.5%;
   margin-bottom: 13%;
 }
 
-.photos.sp-img.even {
+.photos.sp-img:nth-child(2n + 2) {
   padding-left: 6.5%;
   margin-bottom: 13%;
 }
@@ -1093,10 +1093,18 @@ veno box
   max-height: 80vh;
 }
 
+#moreLoad {
+  width: 25.3vw;
+  max-width: 50%;
+  margin: 0 6.5%;
+}
+
 button#moreLoadButton {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 25.3vw;
   padding: 0;
   border: none;
   background-image: url(./images/common/formore.jpg);
@@ -1108,8 +1116,12 @@ button#moreLoadButton {
 }
 
 .moreLoadButton__text {
-  font-size: 1.7rem;
+  font-size: 1.4rem;
   line-height: 1.8;
+}
+
+br.button__br {
+  display: block;
 }
 
 .sk-wandering-cubes.-gallery {
@@ -1441,11 +1453,7 @@ button#moreLoadButton {
     padding: 0 0 0 92px;
   }
 
-  .photos.pc-img.even.last {
-    margin-bottom: 0px;
-  }
-
-  .photos.pc-img.odd.last {
+  .photos.pc-img.last {
     margin-bottom: 0px;
   }
 
@@ -1460,9 +1468,21 @@ button#moreLoadButton {
     margin-bottom: 30px;
   }
 
-  #moreLoadButton {
+  #moreLoad {
+    width: auto;
+    max-width: 25%;
+    margin: 0 0 60px;
+  }
+
+  button#moreLoadButton {
     width: 200px;
     height: 200px;
+    padding: 0;
+  }
+
+  .moreLoadButton__text {
+    font-size: 1.7rem;
+    line-height: 1.8;
   }
 
   /*---------------

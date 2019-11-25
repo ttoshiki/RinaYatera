@@ -2,9 +2,9 @@ const VBOX_PRELOAD_IMAGE = '<div class="vbox-preloader"><div class="sk-wandering
 const EVEN_TRANSITION_SPEED = 1600;
 const ODD_TRANTISION_SPEED = 800;
 const FADE_IN_SPEED = 100
-let now_post_num = 6
-let get_post_num = 6
-let total_post_num = now_post_num + get_post_num - 1
+let now_post_num = 7
+let get_post_num = 8
+let total_post_num = now_post_num + get_post_num
 let isFirst = true
 let getJSONResults = []
 let forMoreButtonText = ''
@@ -25,10 +25,17 @@ let venoBox = function() {
 venoBox()
 
 let addPhotosDom = function() {
-    rangeToRoad = getJSONResults.slice(now_post_num + 1, total_post_num)
+    if((now_post_num) < getJSONResults.length) {
+        rangeToRoad = getJSONResults.slice(now_post_num, (now_post_num + get_post_num))
+    } else {
+        console.log('now_post_num', now_post_num)
+        rangeToRoad = getJSONResults.slice(now_post_num - 1, getJSONResults.length)
+    }
+    rangeToRoad = getJSONResults.slice(now_post_num, (now_post_num + get_post_num))
     $('#moreLoad').fadeOut(150, function() { $(this).remove(); })
     $('#moreLoadButton').fadeOut(150, function() { $(this).remove(); })
     $.each(rangeToRoad, function(i, item) {
+        console.log(rangeToRoad.length)
         thumbnailUrl = item['_embedded']['wp:featuredmedia']['0']['media_details']['sizes']['full']['source_url']
         pcThumnailUrl = item['acf']['pc-thumbnail']
         let outputHtml = '<li class="photos pc-img photos-hover addDom"><a href="' + thumbnailUrl + '" class="zoomin" data-gall="artist-pc">'
@@ -37,9 +44,10 @@ let addPhotosDom = function() {
         outputHtml += '<div class="view-more"><p class="view-more__sentense">view more</p></div></li>'
         $(outputHtml).appendTo("#artist-list").hide()
     });
-    $('.addDom:even').css({ position: 'relative', top: 20, opacity: 0, transition: EVEN_TRANSITION_SPEED + 'ms'});
-    $('.addDom:odd').css({ position: 'relative', top: 20, opacity: 0, transition: ODD_TRANTISION_SPEED + 'ms'});
-    $('.addDom').fadeIn(FADE_IN_SPEED).animate({
+    $('.addDom:even').css({ position: 'relative', top: 20, opacity: 0, transition: EVEN_TRANSITION_SPEED + 'ms'}).addClass('even');
+    $('.addDom:odd').css({ position: 'relative', top: 20, opacity: 0, transition: ODD_TRANTISION_SPEED + 'ms'}).addClass('odd');
+    $('.addDom').toggleClass('last');
+    $('.addDom:even').fadeIn(FADE_IN_SPEED).animate({
         top: 0,
         opacity: 1
     },450)
@@ -62,7 +70,7 @@ if (userAgent.indexOf("iPhone") >= 0 || userAgent.indexOf("iPad") >= 0 || userAg
     forMoreButtonText += 'CLICK '
 }
 forMoreButtonText += 'FOR MORE'
-const BUTTON_HTML = '<li class="photos pc-img photos-thumbnail addDom" id="moreLoad"><button id="moreLoadButton"><span class="moreLoadButton__text">CLICK<br>FOR MORE</span></button></li>'
+const BUTTON_HTML = '<li class="photos photos-thumbnail addDom last" id="moreLoad"><button id="moreLoadButton"><span class="moreLoadButton__text">CLICK<br>FOR MORE</span></button></li>'
 
 $("#artist-list").on("click", "#moreLoad", function() {
     $('.moreLoadButton__text').text('LOADING')
@@ -79,7 +87,10 @@ $("#artist-list").on("click", "#moreLoad", function() {
         });
     } else {
         addPhotosDom()
-        if(rangeToRoad.length >= get_post_num - 1) {
+        console.log('now_post_num', now_post_num)
+        console.log('total_post_num', total_post_num)
+        console.log('getJSONResult.length', getJSONResults.length)
+        if(getJSONResults.length > total_post_num) {
             addForMoreButton()
             now_post_num += get_post_num
             total_post_num += get_post_num

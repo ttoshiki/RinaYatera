@@ -81,7 +81,7 @@
                                         $the_query->the_post(); ?>
 								<!--PC-->
 
-								<li class="photos pc-img photos-hover my-effect">
+								<li class="photos photos-hover my-effect">
 									<a href=" <?php echo get_the_post_thumbnail_url()?>" class="zoomin" data-gall="artist-pc">
 									<span class="cover"></span>
 									<img src="<?php echo get_field('pc-thumbnail'); ?>" alt="">
@@ -156,7 +156,7 @@ var userAgent = navigator.userAgent;
 if (userAgent.indexOf("iPhone") >= 0 || userAgent.indexOf("iPad") >= 0 || userAgent.indexOf("Android") >= 0) {
 	window.addEventListener("orientationchange", resizeHandler);
 	$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />');
-	$('.moreLoadButton__text').html('TAP<br>FOR MORE')
+	$('.moreLoadButton__text').html('TAP<br class="button__br">FOR MORE')
 } else {
 	window.addEventListener("resize", resizeHandler);
 	$('head').prepend('<meta name="viewport" content="width=1200" />');
