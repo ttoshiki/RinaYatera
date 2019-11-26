@@ -747,12 +747,12 @@ gallery works
   box-sizing: border-box;
 }
 
-.photos.sp-img:nth-child(2n) {
+.photos.sp-img:nth-child(odd) {
   padding-right: 6.5%;
   margin-bottom: 13%;
 }
 
-.photos.sp-img:nth-child(2n + 2) {
+.photos.sp-img:nth-child(even) {
   padding-left: 6.5%;
   margin-bottom: 13%;
 }
@@ -1094,9 +1094,8 @@ veno box
 }
 
 #moreLoad {
-  width: 25.3vw;
+  width: 29.7vw;
   max-width: 50%;
-  margin: 0 6.5%;
 }
 
 button#moreLoadButton {
@@ -1104,7 +1103,7 @@ button#moreLoadButton {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 25.3vw;
+  height: 29.7vw;
   padding: 0;
   border: none;
   background-image: url(./images/common/formore.jpg);

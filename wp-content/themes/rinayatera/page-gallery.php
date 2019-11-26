@@ -43,7 +43,7 @@
 						</li>
 					<?php
                             } ?>
-							<li class="photos pc-img photos-thumbnail my-effect" id="moreLoad">
+							<li class="photos photos-thumbnail my-effect" id="moreLoad">
 								<button id="moreLoadButton"><span class="moreLoadButton__text">CLICK<br>FOR MORE</span></button>
 							</li>
 						</ul>
@@ -152,8 +152,13 @@ $(function(){
 
 <script>
 var userAgent = navigator.userAgent;
+let isMobile = false
 // スマートフォンの場合はorientationchangeイベントを監視する
 if (userAgent.indexOf("iPhone") >= 0 || userAgent.indexOf("iPad") >= 0 || userAgent.indexOf("Android") >= 0) {
+	isMobile = true
+}
+
+if(isMobile) {
 	window.addEventListener("orientationchange", resizeHandler);
 	$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />');
 	$('.moreLoadButton__text').html('TAP<br class="button__br">FOR MORE')

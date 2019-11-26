@@ -3,7 +3,7 @@ const EVEN_TRANSITION_SPEED = 1600;
 const ODD_TRANTISION_SPEED = 800;
 const FADE_IN_SPEED = 100
 let now_post_num = 7
-let get_post_num = 8
+let get_post_num = 4
 let total_post_num = now_post_num + get_post_num
 let isFirst = true
 let getJSONResults = []
@@ -24,16 +24,20 @@ let venoBox = function() {
 }
 venoBox()
 
+if(isMobile) {
+    $('.pc-img').remove()
+}
+
 let addPhotosDom = function() {
     // 記事の総数より現在の表示記事数が少なかったら読み込む記事数だけ読む
-    if(now_post_num < getJSONResults.length) {
-        rangeToRoad = getJSONResults.slice(now_post_num, (now_post_num + get_post_num))
+    console.log(total_post_num + 1)
+    if(total_post_num + 1 < getJSONResults.length) {
+        rangeToRoad = getJSONResults.slice(now_post_num, total_post_num)
     // 記事の総数より現在の表示記事数が多い、または同じ時は記事の最後まで読み込む
     } else {
         console.log('now_post_num', now_post_num)
-        rangeToRoad = getJSONResults.slice(now_post_num - 1, getJSONResults.length)
+        rangeToRoad = getJSONResults.slice(now_post_num, getJSONResults.length)
     }
-    rangeToRoad = getJSONResults.slice(now_post_num, (now_post_num + get_post_num))
     let addDomAnimation = new TimelineMax()
     addDomAnimation.to('#moreLoad', 0.15, {
         opacity: 0,
@@ -42,11 +46,16 @@ let addPhotosDom = function() {
         onComplete: fadeIn
     });
     $.each(rangeToRoad, function(i, item) {
-        thumbnailUrl = item['_embedded']['wp:featuredmedia']['0']['media_details']['sizes']['full']['source_url']
-        pcThumnailUrl = item['acf']['pc-thumbnail']
-        let outputHtml = '<li class="photos pc-img photos-hover addDom"><a href="' + thumbnailUrl + '" class="zoomin" data-gall="artist-pc">'
+        let outputHtml = ''
+        if(isMobile) {
+            thumbnailUrl = item['acf']['sp-samuneiru']
+            outputHtml = '<li class="photos sp-img photos-hover addDom"><a href="' + thumbnailUrl + '" class="zoomin" data-gall="artist-pc">'
+        } else {
+            thumbnailUrl = item['acf']['pc-thumbnail']
+            outputHtml = '<li class="photos pc-img photos-hover addDom"><a href="' + thumbnailUrl + '" class="zoomin" data-gall="artist-sp">'
+        }
         outputHtml += `<span class="cover"></span>`
-        outputHtml += '<img src="' + pcThumnailUrl + '" alt=""></a>'
+        outputHtml += '<img src="' + thumbnailUrl + '" alt=""></a>'
         outputHtml += '<div class="view-more"><p class="view-more__sentense">view more</p></div></li>'
         $(outputHtml).appendTo("#artist-list").hide()
     });
@@ -75,12 +84,13 @@ let addForMoreButton = function() {
     })
 }
 
-if (userAgent.indexOf("iPhone") >= 0 || userAgent.indexOf("iPad") >= 0 || userAgent.indexOf("Android") >= 0) {
+if (isMobile) {
     forMoreButtonText += 'TAP '
 } else {
     window.addEventListener("resize", resizeHandler);
     forMoreButtonText += 'CLICK '
 }
+
 forMoreButtonText += 'FOR MORE'
 const BUTTON_HTML = '<li class="photos photos-thumbnail addDom last" id="moreLoad"><button id="moreLoadButton"><span class="moreLoadButton__text">CLICK<br>FOR MORE</span></button></li>'
 
@@ -102,7 +112,7 @@ $("#artist-list").on("click", "#moreLoad", function() {
         console.log('now_post_num', now_post_num)
         console.log('total_post_num', total_post_num)
         console.log('getJSONResult.length', getJSONResults.length)
-        if(getJSONResults.length > total_post_num) {
+        if(total_post_num + 1 < getJSONResults.length) {
             addForMoreButton()
             now_post_num += get_post_num
             total_post_num += get_post_num
