@@ -85,14 +85,13 @@ let addForMoreButton = function() {
 }
 
 if (isMobile) {
-    forMoreButtonText += 'TAP '
+    forMoreButtonText += 'TAP<br class="button__br">'
 } else {
-    window.addEventListener("resize", resizeHandler);
     forMoreButtonText += 'CLICK '
 }
 
 forMoreButtonText += 'FOR MORE'
-const BUTTON_HTML = '<li class="photos photos-thumbnail addDom last" id="moreLoad"><button id="moreLoadButton"><span class="moreLoadButton__text">CLICK<br>FOR MORE</span></button></li>'
+const BUTTON_HTML = '<li class="photos photos-thumbnail addDom last" id="moreLoad"><button id="moreLoadButton"><span class="moreLoadButton__text">' + forMoreButtonText + '</span></button></li>'
 
 $("#artist-list").on("click", "#moreLoad", function() {
     $('.moreLoadButton__text').text('LOADING')
