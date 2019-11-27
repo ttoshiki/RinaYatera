@@ -49,10 +49,11 @@ let addPhotosDom = function() {
         let outputHtml = ''
         if(isMobile) {
             thumbnailUrl = item['acf']['sp-samuneiru']
-            outputHtml = '<li class="photos sp-img photos-hover addDom"><a href="' + thumbnailUrl + '" class="zoomin" data-gall="artist-pc">'
+            outputHtml = '<li class="photos sp-img photos-hover addDom"><a href="' + thumbnailUrl + '" class="zoomin" data-gall="artist-sp">'
         } else {
             thumbnailUrl = item['acf']['pc-thumbnail']
-            outputHtml = '<li class="photos pc-img photos-hover addDom"><a href="' + thumbnailUrl + '" class="zoomin" data-gall="artist-sp">'
+            pcVboxImage = item['_embedded']['wp:featuredmedia']['0']['media_details']['sizes']['full']['source_url']
+            outputHtml = '<li class="photos pc-img photos-hover addDom"><a href="' + pcVboxImage + '" class="zoomin" data-gall="artist-pc">'
         }
         outputHtml += `<span class="cover"></span>`
         outputHtml += '<img src="' + thumbnailUrl + '" alt=""></a>'
@@ -87,7 +88,7 @@ let addForMoreButton = function() {
 if (isMobile) {
     forMoreButtonText += 'TAP<br class="button__br">'
 } else {
-    forMoreButtonText += 'CLICK '
+    forMoreButtonText += 'CLICK<br>'
 }
 
 forMoreButtonText += 'FOR MORE'
