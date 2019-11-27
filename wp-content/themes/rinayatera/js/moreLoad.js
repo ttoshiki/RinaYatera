@@ -7,8 +7,18 @@ let get_post_num = 4
 let total_post_num = now_post_num + get_post_num
 let isFirst = true
 let getJSONResults = []
-let forMoreButtonText = ''
 let rangeToRoad = []
+
+let forMoreButtonText = ''
+if (isMobile) {
+    forMoreButtonText += 'TAP<br class="button__br">'
+} else {
+    forMoreButtonText += 'CLICK<br>'
+}
+
+forMoreButtonText += 'FOR MORE'
+const BUTTON_HTML = '<li class="photos photos-thumbnail addDom last" id="moreLoad"><button id="moreLoadButton"><span class="moreLoadButton__text">' + forMoreButtonText + '</span></button></li>'
+
 let venoBox = function() {
     $('.zoomin').venobox({
         infinigall: true,
@@ -39,12 +49,14 @@ let addPhotosDom = function() {
         rangeToRoad = getJSONResults.slice(now_post_num, getJSONResults.length)
     }
     let addDomAnimation = new TimelineMax()
-    addDomAnimation.to('#moreLoad', 0.15, {
+    addDomAnimation.to('#moreLoad', 0.3, {
         opacity: 0,
-    }).to('#moreLoad', 0.01, {
+    }).to('#moreLoadButton', 0.001, {
+        display: 'none',
+    }).to('#moreLoad', 0.001, {
         display: 'none',
         onComplete: fadeIn
-    });
+    })
     $.each(rangeToRoad, function(i, item) {
         let outputHtml = ''
         if(isMobile) {
@@ -66,7 +78,7 @@ let addPhotosDom = function() {
         $('.addDom').fadeIn(FADE_IN_SPEED).animate({
             top: 0,
             opacity: 1
-        },450)
+        },300).toggleClass('addDom')
         $('#moreLoad').fadeOut(150, function() { $(this).remove(); })
         $('#moreLoadButton').fadeOut(150, function() { $(this).remove(); })
     }
@@ -76,7 +88,7 @@ let addPhotosDom = function() {
 let addForMoreButton = function() {
     $(BUTTON_HTML).appendTo("#artist-list").fadeOut(0)
     let addButtonAnimation = new TimelineMax()
-    addButtonAnimation.to('#moreLoad', 0.01, {
+    addButtonAnimation.to('#moreLoad', 0.1, {
         position: 'relative', top: 20, opacity: 0, transition: EVEN_TRANSITION_SPEED + 'ms'
     }).to('#moreLoad', 0.45, {
         opacity: 1,
@@ -84,15 +96,6 @@ let addForMoreButton = function() {
         top: 0
     })
 }
-
-if (isMobile) {
-    forMoreButtonText += 'TAP<br class="button__br">'
-} else {
-    forMoreButtonText += 'CLICK<br>'
-}
-
-forMoreButtonText += 'FOR MORE'
-const BUTTON_HTML = '<li class="photos photos-thumbnail addDom last" id="moreLoad"><button id="moreLoadButton"><span class="moreLoadButton__text">' + forMoreButtonText + '</span></button></li>'
 
 $("#artist-list").on("click", "#moreLoad", function() {
     $('.moreLoadButton__text').text('LOADING')
