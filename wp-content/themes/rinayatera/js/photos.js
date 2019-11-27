@@ -36,21 +36,24 @@ $(function(){
 
 (function ($) {
   // 画面下からどの程度の位置でエフェクトするかの設定
-  var EffectH = 100;
+  var effectHEven = 200;
+  var effectHOdd = 250;
   // どのくらい動かすかの設定
-  var EffectTop = 30;
-  var effectTimeOdd = 800;
+  var effectTopEven = 80;
+  var effectTopOdd = 30;
+
   var effectTimeEven = 1600;
+  var effectTimeOdd = 600;
   // 事前準備として少し下げたところに透明にして配置。
-  $('.my-effect:nth-child(even)').css({ position: 'relative', left: 0, top: EffectTop, opacity: 0, transition: effectTimeOdd + 'ms' });
+  $('.my-effect:nth-of-type(odd)').css({ position: 'relative', left: 0, top: effectTopOdd, opacity: 0, transition: effectTimeOdd + 'ms' });
   // スクロールイベント
   $(window).on('scroll load', function() {
     var scTop = $(this).scrollTop();
     var scBottom = scTop + $(this).height();
-    var effectPos = scBottom - EffectH;
+    var effectPos = scBottom - effectHOdd;
     // エフェクト対象それぞれの位置とスクロール位置を比べて
     // 範囲に入っていればエフェクトを実行する
-    $('.my-effect').each( function() {
+    $('.my-effect:nth-of-type(even)').each( function() {
       var thisPos = $(this).offset().top;
       if ( thisPos < effectPos ) {
         $(this).css({ 'opacity' : 1, top: 0 });
@@ -58,12 +61,12 @@ $(function(){
     });
   });
 
-  $('.my-effect:nth-child(odd)').css({ position: 'relative', left: 0, top: EffectTop, opacity: 0, transition: effectTimeEven + 'ms' });
+  $('.my-effect:nth-of-type(even)').css({ position: 'relative', left: 0, top: effectTopEven, opacity: 0, transition: effectTimeEven + 'ms' });
   $(window).on('scroll load', function() {
     var scTop = $(this).scrollTop();
     var scBottom = scTop + $(this).height();
-    var effectPos = scBottom - EffectH;
-    $('.my-effect').each( function() {
+    var effectPos = scBottom - effectHEven;
+    $('.my-effect:nth-of-type(odd)').each( function() {
       var thisPos = $(this).offset().top;
       if ( thisPos < effectPos ) {
         $(this).css({ 'opacity' : 1, top: 0 });

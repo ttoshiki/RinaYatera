@@ -27,7 +27,7 @@
 						<?php while ($the_query->have_posts()) {
                                 $the_query->the_post(); ?>
 						<!--PC-->
-						<li class="photos pc-img photos-hover my-effect">
+						<li class="photos pc-img photos-hover">
 							<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-pc">
 							<span class="cover"></span>
 							<img src="<?php echo get_field('pc-thumbnail'); ?>" alt=""></a>
@@ -36,7 +36,7 @@
 							</div>
 						</li>
 						<!--SP-->
-						<li class="photos sp-img photos-thumbnail my-effect">
+						<li class="photos sp-img photos-thumbnail">
 							<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-sp">
                                 	<img src="<?php echo get_field('sp-samuneiru'); ?>" alt="">
 									</a>
@@ -166,6 +166,7 @@ if(isMobile) {
 	window.addEventListener("resize", resizeHandler);
 	$('head').prepend('<meta name="viewport" content="width=1200" />');
 	$('.moreLoadButton__text').html('CLICK<br>FOR MORE')
+	$('.sp-img').remove()
 }
 
 function resizeHandler() {

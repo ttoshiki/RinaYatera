@@ -1,7 +1,7 @@
 const VBOX_PRELOAD_IMAGE = '<div class="vbox-preloader"><div class="sk-wandering-cubes -gallery"><div class="sk-cube sk-cube1 -gallery" style="background-color: rgb(9, 137, 141);"></div><div class="sk-cube sk-cube2 -gallery" style="background-color: rgb(9, 137, 141);"></div></div></div>'
 const EVEN_TRANSITION_SPEED = 1600;
 const ODD_TRANTISION_SPEED = 800;
-const FADE_IN_SPEED = 100
+const FADE_IN_SPEED = 50
 let now_post_num = 7
 let get_post_num = 4
 let total_post_num = now_post_num + get_post_num
