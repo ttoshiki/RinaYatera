@@ -1093,12 +1093,12 @@ veno box
   max-height: 80vh;
 }
 
-#moreLoad {
+.moreLoad {
   width: 29.7vw;
   max-width: 50%;
 }
 
-button#moreLoadButton {
+button.moreLoadButton {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1110,7 +1110,7 @@ button#moreLoadButton {
   font-family: "big-caslon-fb", "a-otf-ryumin-pr6n", "serif";
 }
 
-#moreLoadButton:hover {
+.moreLoadButton:hover {
   cursor: pointer;
 }
 
@@ -1467,13 +1467,13 @@ br.button__br {
     margin-bottom: 30px;
   }
 
-  #moreLoad {
+  .moreLoad {
     width: auto;
     max-width: 25%;
     margin: 0 0 60px;
   }
 
-  button#moreLoadButton {
+  button.moreLoadButton {
     width: 200px;
     height: 200px;
     padding: 0;

@@ -29,8 +29,9 @@
 						<!--PC-->
 						<li class="photos pc-img photos-hover">
 							<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-pc">
-							<span class="cover"></span>
-							<img src="<?php echo get_field('pc-thumbnail'); ?>" alt=""></a>
+								<span class="cover"></span>
+								<img src="<?php echo get_field('pc-thumbnail'); ?>" alt="">
+							</a>
 							<div class="view-more">
 								<p class="view-more__sentense">view more</p>
 							</div>
@@ -38,13 +39,13 @@
 						<!--SP-->
 						<li class="photos sp-img photos-thumbnail">
 							<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-sp">
-                                	<img src="<?php echo get_field('sp-samuneiru'); ?>" alt="">
-									</a>
+                                <img src="<?php echo get_field('sp-samuneiru'); ?>" alt="">
+							</a>
 						</li>
 					<?php
                             } ?>
-							<li class="photos photos-thumbnail my-effect" id="moreLoad">
-								<button id="moreLoadButton"><span class="moreLoadButton__text">CLICK<br>FOR MORE</span></button>
+							<li class="photos photos-thumbnail moreLoad" id="moreLoad__artist">
+								<button value="artist" class="moreLoadButton" id="moreLoadButton__artist"><span class="moreLoadButton__text">CLICK<br>FOR MORE</span></button>
 							</li>
 						</ul>
 						<?php
@@ -67,7 +68,7 @@
                                 // The Query
                                 $args = array(
                                     'post_type' => 'post',
-                                    'posts_per_page' => -1,
+                                    'posts_per_page' => 7,
                                     'no_found_rows' => true,  //ページャーを使う時はfalseに。
                                     'category_name' => 'other'
                                     //論理和：カテゴリースラッグで指定
@@ -81,10 +82,11 @@
                                         $the_query->the_post(); ?>
 								<!--PC-->
 
-								<li class="photos photos-hover my-effect">
+								<li class="photos pc-img photos-hover my-effect">
 									<a href=" <?php echo get_the_post_thumbnail_url()?>" class="zoomin" data-gall="artist-pc">
-									<span class="cover"></span>
-									<img src="<?php echo get_field('pc-thumbnail'); ?>" alt="">
+										<span class="cover"></span>
+										<img src="<?php echo get_field('pc-thumbnail'); ?>" alt="">
+									</a>
 									<div class="view-more">
 										<p class="view-more__sentense">view more</p>
 									</div>
@@ -97,6 +99,9 @@
 								</li>
 							<?php
                                     } ?>
+									<li class="photos photos-thumbnail moreLoad" id="moreLoad__other">
+										<button value="other" class="moreLoadButton" id="moreLoadButton__other"><span class="moreLoadButton__text">CLICK<br>FOR MORE</span></button>
+									</li>
 								</ul>
 								<?php
                                 /* Restore original Post Data */
