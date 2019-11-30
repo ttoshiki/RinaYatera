@@ -11,12 +11,24 @@ let otherNowPostNum = 7
 let otherGetPostNum = 4
 let otherTotalPostNum = otherNowPostNum + otherGetPostNum
 
+let weddingNowPostNum = 7
+let weddingGetPostNum = 4
+let weddingTotalPostNum = weddingNowPostNum + weddingGetPostNum
+
+let familyNowPostNum = 7
+let familyGetPostNum = 4
+let familyTotalPostNum = familyNowPostNum + familyGetPostNum
+
 let isArtistFirst = true
 let isOtherFirst = true
+let isWeddingFirst = true
+let isFamilyFirst = true
 
 
 let artistGetJSONResults = []
 let otherGetJSONResults = []
+let weddingGetJSONResults = []
+let familyGetJSONResults = []
 let rangeToRoad = []
 
 let category = null
@@ -70,10 +82,28 @@ let addPhotosDom = function() {
                 rangeToRoad = otherGetJSONResults.slice(otherNowPostNum, otherGetJSONResults.length)
             }
             break
+
+        case 'wedding':
+            if(weddingTotalPostNum + 1 < weddingGetJSONResults.length) {
+                rangeToRoad = weddingGetJSONResults.slice(weddingNowPostNum, weddingTotalPostNum)
+            // 記事の総数より現在の表示記事数が多い、または同じ時は記事の最後まで読み込む
+            } else {
+                rangeToRoad = weddingGetJSONResults.slice(weddingNowPostNum, weddingGetJSONResults.length)
+            }
+            break
+
+        case 'family':
+            if(familyTotalPostNum + 1 < familyGetJSONResults.length) {
+                rangeToRoad = familyGetJSONResults.slice(familyNowPostNum, familyTotalPostNum)
+            // 記事の総数より現在の表示記事数が多い、または同じ時は記事の最後まで読み込む
+            } else {
+                rangeToRoad = familyGetJSONResults.slice(familyNowPostNum, familyGetJSONResults.length)
+            }
+            break
     }
     let addDomAnimation = new TimelineMax()
-    const LIST_OPACITY_SPEED = 0.3
-    const BUTTON_FADEOUT_SPEED = 0.001
+    const LIST_OPACITY_SPEED = 0.2
+    const BUTTON_FADEOUT_SPEED = 0.01
     switch(category) {
         case 'artist':
             addDomAnimation.to('#moreLoad__artist', LIST_OPACITY_SPEED, {
@@ -91,6 +121,28 @@ let addPhotosDom = function() {
             }).to('#moreLoadButton__other', BUTTON_FADEOUT_SPEED, {
                 display: 'none',
             }).to('#moreLoad__other', BUTTON_FADEOUT_SPEED, {
+                display: 'none',
+                onComplete: fadeIn
+            })
+            break
+
+        case 'wedding':
+            addDomAnimation.to('#moreLoad__wedding', LIST_OPACITY_SPEED, {
+                opacity: 0,
+            }).to('#moreLoadButton__wedding', BUTTON_FADEOUT_SPEED, {
+                display: 'none',
+            }).to('#moreLoad__wedding', BUTTON_FADEOUT_SPEED, {
+                display: 'none',
+                onComplete: fadeIn
+            })
+            break
+
+        case 'family':
+            addDomAnimation.to('#moreLoad__family', LIST_OPACITY_SPEED, {
+                opacity: 0,
+            }).to('#moreLoadButton__family', BUTTON_FADEOUT_SPEED, {
+                display: 'none',
+            }).to('#moreLoad__family', BUTTON_FADEOUT_SPEED, {
                 display: 'none',
                 onComplete: fadeIn
             })
@@ -116,15 +168,21 @@ let addPhotosDom = function() {
             case 'other':
                 $(outputHtml).appendTo("#other-list").hide()
                 break
+            case 'wedding':
+                $(outputHtml).appendTo("#wedding-list").hide()
+                break
+            case 'family':
+                $(outputHtml).appendTo("#family-list").hide()
+                break
         }
     });
     $('.addDom:even').css({ position: 'relative', top: 20, opacity: 0, transition: EVEN_TRANSITION_SPEED + 'ms'}).addClass('even');
     $('.addDom:odd').css({ position: 'relative', top: 20, opacity: 0, transition: ODD_TRANTISION_SPEED + 'ms'}).addClass('odd');
     function fadeIn() {
-        $('.addDom').fadeIn(FADE_IN_SPEED).animate({
+        $('.addDom').fadeIn(FADE_IN_SPEED).delay(1000).animate({
             top: 0,
             opacity: 1
-        },300).toggleClass('addDom')
+        },100).toggleClass('addDom')
         switch (category) {
             case 'artist':
                 $('#moreLoad__artist').fadeOut(150, function() { $(this).remove(); })
@@ -135,6 +193,16 @@ let addPhotosDom = function() {
                 $('#moreLoad__other').fadeOut(150, function() { $(this).remove(); })
                 $('#moreLoadButton__other').fadeOut(150, function() { $(this).remove(); })
                 break
+
+            case 'wedding':
+                $('#moreLoad__wedding').fadeOut(150, function() { $(this).remove(); })
+                $('#moreLoadButton__wedding').fadeOut(150, function() { $(this).remove(); })
+                break
+
+            case 'family':
+                $('#moreLoad__family').fadeOut(150, function() { $(this).remove(); })
+                $('#moreLoadButton__family').fadeOut(150, function() { $(this).remove(); })
+                break
         }
     }
     venoBox()
@@ -144,7 +212,7 @@ let addForMoreButton = function() {
     let addButtonAnimation = new TimelineMax()
     switch (category) {
         case 'artist':
-            buttonHtml = '<li class="photos photos-thumbnail addDom last moreLoad" id="moreLoad__artist"><button class="moreLoadButton" id="moreLoadButton__artst"><span class="moreLoadButton__text">' + forMoreButtonText + '</span></button></li>'
+            buttonHtml = '<li class="photos photos-thumbnail addDom last moreLoad" id="moreLoad__artist"><button value="artist" class="moreLoadButton" id="moreLoadButton__artist"><span class="moreLoadButton__text">' + forMoreButtonText + '</span></button></li>'
             $(buttonHtml).appendTo("#artist-list").fadeOut(0)
             addButtonAnimation.to('#moreLoad__artist', 0.1, {
                 position: 'relative', top: 20, opacity: 0, transition: EVEN_TRANSITION_SPEED + 'ms'
@@ -156,11 +224,35 @@ let addForMoreButton = function() {
             break
 
         case 'other':
-            buttonHtml = '<li class="photos photos-thumbnail addDom last moreLoad" id="moreLoad__other"><button class="moreLoadButton" id="moreLoadButton__artst"><span class="moreLoadButton__text">' + forMoreButtonText + '</span></button></li>'
+            buttonHtml = '<li class="photos photos-thumbnail addDom last moreLoad" id="moreLoad__other"><button value="other" class="moreLoadButton" id="moreLoadButton__other"><span class="moreLoadButton__text">' + forMoreButtonText + '</span></button></li>'
             $(buttonHtml).appendTo("#other-list").fadeOut(0)
             addButtonAnimation.to('#moreLoad__other', 0.1, {
                 position: 'relative', top: 20, opacity: 0, transition: EVEN_TRANSITION_SPEED + 'ms'
             }).to('#moreLoad__other', 0.45, {
+                opacity: 1,
+                delay: 0.5,
+                top: 0
+            })
+            break
+
+        case 'wedding':
+            buttonHtml = '<li class="photos photos-thumbnail addDom last moreLoad" id="moreLoad__wedding"><button value="wedding" class="moreLoadButton" id="moreLoadButton__wedding"><span class="moreLoadButton__text">' + forMoreButtonText + '</span></button></li>'
+            $(buttonHtml).appendTo("#wedding-list").fadeOut(0)
+            addButtonAnimation.to('#moreLoad__wedding', 0.1, {
+                position: 'relative', top: 20, opacity: 0, transition: EVEN_TRANSITION_SPEED + 'ms'
+            }).to('#moreLoad__wedding', 0.45, {
+                opacity: 1,
+                delay: 0.5,
+                top: 0
+            })
+            break
+
+        case 'family':
+            buttonHtml = '<li class="photos photos-thumbnail addDom last moreLoad" id="moreLoad__family"><button value="family" class="moreLoadButton" id="moreLoadButton__family"><span class="moreLoadButton__text">' + forMoreButtonText + '</span></button></li>'
+            $(buttonHtml).appendTo("#family-list").fadeOut(0)
+            addButtonAnimation.to('#moreLoad__family', 0.1, {
+                position: 'relative', top: 20, opacity: 0, transition: EVEN_TRANSITION_SPEED + 'ms'
+            }).to('#moreLoad__family', 0.45, {
                 opacity: 1,
                 delay: 0.5,
                 top: 0
@@ -184,6 +276,16 @@ $('.photos-thumbnail').on('click', '.moreLoad', function() {
         case 'other':
             category = 'other'
             categoryNumber = 4
+            break;
+
+        case 'wedding':
+            category = 'wedding'
+            categoryNumber = 5
+            break;
+
+        case 'family':
+            category = 'family'
+            categoryNumber = 6
             break;
     }
     getJSONUrl = '//rinayatera.com/wp/wp-json/wp/v2/posts?_embed&categories=' + categoryNumber + '&per_page=100'
@@ -230,6 +332,52 @@ $('.photos-thumbnail').on('click', '.moreLoad', function() {
                     addForMoreButton()
                     otherNowPostNum += otherGetPostNum
                     otherTotalPostNum += otherGetPostNum
+                }
+            }
+            break
+
+        case 'wedding':
+            if(isWeddingFirst) {
+                $.getJSON( getJSONUrl, function(results) {
+                    isWeddingFirst = false
+                    weddingGetJSONResults = results
+                    addPhotosDom()
+                    weddingNowPostNum += weddingGetPostNum
+                    weddingTotalPostNum += weddingGetPostNum
+                    addForMoreButton()
+                })
+            } else {
+                addPhotosDom()
+                console.log('weddingNowPostNum', weddingNowPostNum)
+                console.log('weddingTotalPostNum', weddingTotalPostNum)
+                console.log('getJSONResult.length', weddingGetJSONResults.length)
+                if(weddingTotalPostNum + 1 < weddingGetJSONResults.length) {
+                    addForMoreButton()
+                    weddingNowPostNum += weddingGetPostNum
+                    weddingTotalPostNum += weddingGetPostNum
+                }
+            }
+            break
+
+        case 'family':
+            if(isFamilyFirst) {
+                $.getJSON( getJSONUrl, function(results) {
+                    isFamilyFirst = false
+                    familyGetJSONResults = results
+                    addPhotosDom()
+                    familyNowPostNum += familyGetPostNum
+                    familyTotalPostNum += familyGetPostNum
+                    addForMoreButton()
+                })
+            } else {
+                addPhotosDom()
+                console.log('familyNowPostNum', familyNowPostNum)
+                console.log('familyTotalPostNum', familyTotalPostNum)
+                console.log('getJSONResult.length', familyGetJSONResults.length)
+                if(familyTotalPostNum + 1 < familyGetJSONResults.length) {
+                    addForMoreButton()
+                    familyNowPostNum += familyGetPostNum
+                    familyTotalPostNum += familyGetPostNum
                 }
             }
             break
