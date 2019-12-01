@@ -1297,6 +1297,7 @@ veno box
 	.nav-list{
 		display: flex;
 		justify-content: space-between;
+		width: 100%;
 
 }
 	.nav-background{
@@ -1319,7 +1320,7 @@ veno box
 
 	}
 
-	.nav-list__secondlevel{
+	.sub-menu{
 	display: none;
 	background: rgba(247,248,248,0.7);
 	-webkit-background: rgba(247,248,248,0.7);
@@ -1330,7 +1331,7 @@ veno box
 
 }
 
-	.nav-list__parent:hover>.nav-list__secondlevel{
+	.nav-list__parent:hover>.sub-menu{
 		display: block;
 /*		visibility: visible;*/
 /*		opacity: 1;*/
@@ -1341,18 +1342,28 @@ veno box
 
 
 
-	.works.nav-list__secondlevel{
+	.works.sub-menu{
 		width: 130px;
 	}
 
 
 
-	.nav-current{
+	.current-menu-item>a{
 		border-bottom: solid 3px #09898d;
 		padding-bottom: 3px;
 		height: 20px;
+		margin-right: -0.2em;
 	}
 
+	/* .current-menu-item::after{
+		content='';
+		border-bottom: solid 3px #09898d;
+		display: block;
+		width: calc(100%-0.3em);
+	} */
+
+
+	.current-menu-item>ul>
 
 	.nav-current_sub{
 		border-bottom: solid 3px #09898d;

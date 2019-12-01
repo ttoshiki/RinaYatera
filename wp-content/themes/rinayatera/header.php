@@ -49,7 +49,7 @@
   <?php if ( is_home() || is_front_page() ) : ?>
     <div class="header-inner">
          <h1 class="header-title">
-           <a href="../index.html">
+         <a href="index.php?page_id=2">
              <span class="header-logo text_left">rina yatera</span>
              <span class="header-logo__sub text_left">photographer</span>
            </a>
@@ -57,7 +57,7 @@
   <?php else: ?>
     <div class="header-inner">
          <p class="header-title">
-           <a href="../index.html">
+           <a href="index.php?page_id=2">
              <span class="header-logo text_left">rina yatera</span>
              <span class="header-logo__sub text_left">photographer</span>
            </a>
