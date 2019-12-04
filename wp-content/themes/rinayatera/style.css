@@ -44,8 +44,7 @@ input[type="text"],input[type="submit"] {
 input,textarea{
 	-webkit-appearance: none;
 	-moz-appearance: none;
-	-webkit-border-radius: 0;
-	-moz-border-radius: 0;
+	border-radius: 0;
 	appearance: none;
 	color: #0F234A;
 	background-color: #F7F8F8;
@@ -1338,10 +1337,6 @@ veno box
 		position: absolute;
 	}
 
-
-
-
-
 	.works.sub-menu{
 		width: 130px;
 	}
@@ -1354,16 +1349,6 @@ veno box
 		height: 20px;
 		margin-right: -0.2em;
 	}
-
-	/* .current-menu-item::after{
-		content='';
-		border-bottom: solid 3px #09898d;
-		display: block;
-		width: calc(100%-0.3em);
-	} */
-
-
-	.current-menu-item>ul>
 
 	.nav-current_sub{
 		border-bottom: solid 3px #09898d;
