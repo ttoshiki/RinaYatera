@@ -1,7 +1,5 @@
 <?php get_header();?>
 <body <?php body_class(); ?>>
-
-
 	<!--main-->
 	<main>
 		<div class="inner">
@@ -9,7 +7,6 @@
 			<p class="title_background works">works</p>
 			<h2 class="photos lowpage_h2">wedding</h2>
 				<section class="photos-h2__parents" id="wedding">
-
 					<div class="photos-inner">
 					<?php
 
@@ -133,8 +130,6 @@
 
 	</main>
 	<!--//main-->
-
-
 	<!--footer-->
 	<footer class="footer-lowpage inner">
 		<div class="inner">
@@ -182,8 +177,6 @@ $(function(){
 		});
 	});
 </script>
-
-
 <script src="<?php echo get_template_directory_uri(); ?>/js/venobox.min.js"></script>
 
 <script>
