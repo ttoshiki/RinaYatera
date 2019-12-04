@@ -1,7 +1,5 @@
 <?php get_header();?>
 <body <?php body_class(); ?>>
-	
-
 	<!--main-->
 	<main>
 		<div class="inner">
@@ -9,132 +7,114 @@
 			<p class="title_background works">works</p>
 			<h2 class="photos lowpage_h2">wedding</h2>
 				<section class="photos-h2__parents" id="wedding">
-				
 					<div class="photos-inner">
 					<?php
 
-// The Query
-$args = array(
-	'post_type' => 'post',
-	'posts_per_page' => 7,
-	'no_found_rows' => true,  //ページャーを使う時はfalseに。
-	'category_name' => 'wedding'
-	//論理和：カテゴリースラッグで指定
-);
-$the_query = new WP_Query($args);
+                        // The Query
+                        $args = array(
+                            'post_type' => 'post',
+                            'posts_per_page' => 7,
+                            'no_found_rows' => true,  //ページャーを使う時はfalseに。
+                            'category_name' => 'wedding'
+                            //論理和：カテゴリースラッグで指定
+                        );
+                        $the_query = new WP_Query($args);
 
-// The Loop
-if ($the_query->have_posts()) {
-	?><ul class="photos-thumbnail">
-<?php while ($the_query->have_posts()) {
-		$the_query->the_post(); ?>
-<!--PC-->
-<li class="photos pc-img odd photos-hover my-effect">
-	<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-pc">
-	<span class="cover"></span>
-	<?php
-		//画像(返り値は「画像ID」)
-		$img = get_field('pc-thumbnail');
-		$imgurl = wp_get_attachment_image_src($img, 'full'); //サイズは自由に変更してね
-		if ($imgurl) { ?><img src="<?php echo $imgurl[0]; ?>" alt=""></a>
-		<?php } ?>
-	<div class="view-more">
-		<p class="view-more__sentense">view more</p>
-	</div>
-</li>
-<!--SP-->
-<li class="photos sp-img photos-thumbnail my-effect">
-	<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-sp">
-		<?php
-			//画像(返り値は「画像ID」)
-			$img = get_field('sp-samuneiru');
-		$imgurl = wp_get_attachment_image_src($img, 'full'); //サイズは自由に変更してね
-		if ($imgurl) { ?><img src="<?php echo $imgurl[0]; ?>" alt="">
-			<?php } ?>
-			</a>
-</li>
-<?php
-	} ?>
-	<li class="photos pc-img odd photos-hover my-effect">
-		<button id="moreLoad">もっと読みこむ</button>
-	</li>
-</ul>
-<?php
-/* Restore original Post Data */
-
-wp_reset_postdata();
-} else {
-	// no posts found
-}
-	?>
-</div>
-				</section>
-			</div>
-
-				<section class="photos photos-background-color photos-subhead" id="family">
-					<div class="inner photos">
-						<h2 class="photos lowpage_h2__second-category family sticky">family</h2>
-					<div class="photos-inner__second-category">
-
+                        // The Loop
+                        if ($the_query->have_posts()) {
+                            ?><ul class="photos-thumbnail" id="wedding-list">
+						<?php while ($the_query->have_posts()) {
+                                $the_query->the_post(); ?>
+						<!--PC-->
+						<li class="photos pc-img photos-hover">
+							<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="wedding-pc">
+								<span class="cover"></span>
+								<img src="<?php echo get_field('pc-thumbnail'); ?>" alt="">
+							</a>
+							<div class="view-more">
+								<p class="view-more__sentense">view more</p>
+							</div>
+						</li>
+						<!--SP-->
+						<li class="photos sp-img photos-thumbnail">
+							<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="wedding-sp">
+                                <img src="<?php echo get_field('sp-samuneiru'); ?>" alt="">
+							</a>
+						</li>
 					<?php
+                            } ?>
+							<li class="photos photos-thumbnail moreLoad" id="moreLoad__wedding">
+								<button value="wedding" class="moreLoadButton" id="moreLoadButton__wedding"><span class="moreLoadButton__text">CLICK<br>FOR MORE</span></button>
+							</li>
+						</ul>
+						<?php
+                        /* Restore original Post Data */
 
-// The Query
-$args = array(
-	'post_type' => 'post',
-	'posts_per_page' => -1,
-	'no_found_rows' => true,  //ページャーを使う時はfalseに。
-	'category_name' => 'family'
-	//論理和：カテゴリースラッグで指定
-);
-$the_query = new WP_Query($args);
-
-// The Loop
-if ($the_query->have_posts()) {
-	?><ul class="photos-thumbnail">
-<?php while ($the_query->have_posts()) {
-		$the_query->the_post(); ?>
-<!--PC-->
-
-<li class="photos pc-img odd photos-hover my-effect">
-	<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-pc">
-	<span class="cover"></span>
-	<?php
-		//画像(返り値は「画像ID」)
-		$img = get_field('pc-thumbnail');
-		$imgurl = wp_get_attachment_image_src($img, 'full'); //サイズは自由に変更してね
-		if ($imgurl) { ?><img src="<?php echo $imgurl[0]; ?>" alt=""></a>
-		<?php } ?>
-	<div class="view-more">
-		<p class="view-more__sentense">view more</p>
-	</div>
-</li>
-<!--SP-->
-<li class="photos sp-img photos-thumbnail my-effect">
-	<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-sp">
-		<?php
-			//画像(返り値は「画像ID」)
-			$img = get_field('sp-samuneiru');
-		$imgurl = wp_get_attachment_image_src($img, 'full'); //サイズは自由に変更してね
-		if ($imgurl) { ?><img src="<?php echo $imgurl[0]; ?>" alt="">
-			<?php } ?>
-			</a>
-</li>
-<?php
-	} ?>
-</ul>
-<?php
-/* Restore original Post Data */
-
-wp_reset_postdata();
-} else {
-	// no posts found
-}
-	?>
+                        wp_reset_postdata();
+                        } else {
+                            // no posts found
+                        }
+                            ?>
+					</div>
+						</section>
 </div>
-</section>
-</div>
+						<section class="photos photos-background-color photos-subhead" id="family">
+							<div class="inner photos">
+							<h2 class="photos my-effect lowpage_h2__second-category">family</h2>
+							<div class="photos-inner__second-category">
+								<?php
 
-<section>
+                                // The Query
+                                $args = array(
+                                    'post_type' => 'post',
+                                    'posts_per_page' => 7,
+                                    'no_found_rows' => true,  //ページャーを使う時はfalseに。
+                                    'category_name' => 'family'
+                                    //論理和：カテゴリースラッグで指定
+                                );
+                                $the_query = new WP_Query($args);
+
+                                // The Loop
+                                if ($the_query->have_posts()) {
+                                    ?><ul class="photos-thumbnail" id="family-list">
+								<?php while ($the_query->have_posts()) {
+                                        $the_query->the_post(); ?>
+								<!--PC-->
+
+								<li class="photos pc-img photos-hover my-effect">
+									<a href=" <?php echo get_the_post_thumbnail_url()?>" class="zoomin" data-gall="family-pc">
+										<span class="cover"></span>
+										<img src="<?php echo get_field('pc-thumbnail'); ?>" alt="">
+									</a>
+									<div class="view-more">
+										<p class="view-more__sentense">view more</p>
+									</div>
+								</li>
+								<!--SP-->
+								<li class="photos sp-img photos-thumbnail my-effect">
+									<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="family-sp">
+										<img src="<?php echo get_field('sp-samuneiru'); ?>" alt="">
+									</a>
+								</li>
+							<?php
+                                    } ?>
+									<li class="photos photos-thumbnail my-effect moreLoad" id="moreLoad__family">
+										<button value="family" class="moreLoadButton" id="moreLoadButton__family"><span class="moreLoadButton__text">CLICK<br>FOR MORE</span></button>
+									</li>
+								</ul>
+								<?php
+                                /* Restore original Post Data */
+
+                                wp_reset_postdata();
+                                } else {
+                                    // no posts found
+                                }
+                                    ?>
+							</div>
+								</section>
+					</div>
+
+				<section>
 <div class="inner text-center">
 <h3 class="go-to-plan">詳しい撮影プランはコチラ</h3>
 
@@ -150,8 +130,6 @@ wp_reset_postdata();
 
 	</main>
 	<!--//main-->
-
-	
 	<!--footer-->
 	<footer class="footer-lowpage inner">
 		<div class="inner">
@@ -199,23 +177,33 @@ $(function(){
 		});
 	});
 </script>
-
+<script src="<?php echo get_template_directory_uri(); ?>/js/venobox.min.js"></script>
 
 <script>
-// ユーザーエージェントの判別
 var userAgent = navigator.userAgent;
-
+let isMobile = false
 // スマートフォンの場合はorientationchangeイベントを監視する
-if (userAgent.indexOf("iPhone") >= 0 || userAgent.indexOf("iPad") >= 0 || userAgent.indexOf("Android") >= 0)
-window.addEventListener("orientationchange", resizeHandler);
-else
-window.addEventListener("resize", resizeHandler);
+if (userAgent.indexOf("iPhone") >= 0 || userAgent.indexOf("iPad") >= 0 || userAgent.indexOf("Android") >= 0) {
+	isMobile = true
+}
+
+if(isMobile) {
+	window.addEventListener("orientationchange", resizeHandler);
+	$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />');
+	$('.moreLoadButton__text').html('TAP<br class="button__br">FOR MORE')
+} else {
+	window.addEventListener("resize", resizeHandler);
+	$('head').prepend('<meta name="viewport" content="width=1200" />');
+	$('.moreLoadButton__text').html('CLICK<br>FOR MORE')
+	$('.sp-img').remove()
+}
 
 function resizeHandler() {
 }
 </script>
 
-<script src="<?php echo get_template_directory_uri(); ?>/js/style.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.0.1/dist/gsap.min.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/moreLoad.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/script.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/photos.js"></script>
 

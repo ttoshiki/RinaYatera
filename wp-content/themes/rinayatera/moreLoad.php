@@ -12,6 +12,7 @@
             $wpdb->posts
         WHERE
             $wpdb->posts.post_type = 'post' AND $wpdb->posts.post_status = 'publish'
+
         ORDER BY
             $wpdb->posts.post_date DESC
         LIMIT %d, %d";
@@ -42,12 +43,19 @@
     $html = "";
 
     foreach ($results as $result) {
-        $html .= '<article class="articleMainBox">';
+        $html .= '<li class="photos pc-img odd photos-hover my-effect">';
+        $html .= '<a href="'.get_the_post_thumbnail_url($result->ID).'" class="zoomin" data-gall="artist-pc"></a>';
+        // $html .= '<span class="cover"></span>';
+        // $html .= $imgurl = wp_get_attachment_image_src($img, 'full');
+        // $html .= if ($imgurl) { '<img src="'.$imgurl[0]; '" alt=""></a>'};
+        $html .= '<div class="view-more"><p class="view-more__sentense">view more</p></div>';
+
         $html .= '<h1><a href="'.get_permalink($result->ID).'" class="over">'.apply_filters('the_title', $result->post_title).'</a></h1>';
         $html .= '<p>'.get_post_time('M d, Y', 'false', $result->ID).'</p>';
-        $html .= '<p>'.mb_substr(strip_tags($result->post_content), 0, 108).'...</p>';
-        $html .= '<p><a href="'.get_permalink($result->ID).'">Read More</a></p>';
-        $html .= '</article>';
+        // $html .= '<p>'.mb_substr(strip_tags($result->post_content), 0, 108).'...</p>';
+        // $html .= '<p><a href="'.get_permalink($result->ID).'">Read More</a></p>';
+        // $html .= '</article>';
+        $html .= '</li>';
     }
     $returnObj = array();
     $returnObj = array(

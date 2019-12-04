@@ -23,38 +23,29 @@
 
                         // The Loop
                         if ($the_query->have_posts()) {
-                            ?><ul class="photos-thumbnail">
+                            ?><ul class="photos-thumbnail" id="artist-list">
 						<?php while ($the_query->have_posts()) {
                                 $the_query->the_post(); ?>
 						<!--PC-->
-						<li class="photos pc-img odd photos-hover my-effect">
+						<li class="photos pc-img photos-hover">
 							<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-pc">
-							<span class="cover"></span>
-							<?php
-                                //画像(返り値は「画像ID」)
-                                $img = get_field('pc-thumbnail');
-                                $imgurl = wp_get_attachment_image_src($img, 'full'); //サイズは自由に変更してね
-                                if ($imgurl) { ?><img src="<?php echo $imgurl[0]; ?>" alt=""></a>
-								<?php } ?>
+								<span class="cover"></span>
+								<img src="<?php echo get_field('pc-thumbnail'); ?>" alt="">
+							</a>
 							<div class="view-more">
 								<p class="view-more__sentense">view more</p>
 							</div>
 						</li>
 						<!--SP-->
-						<li class="photos sp-img photos-thumbnail my-effect">
+						<li class="photos sp-img photos-thumbnail">
 							<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-sp">
-								<?php
-                                    //画像(返り値は「画像ID」)
-                                    $img = get_field('sp-samuneiru');
-                                $imgurl = wp_get_attachment_image_src($img, 'full'); //サイズは自由に変更してね
-                                if ($imgurl) { ?><img src="<?php echo $imgurl[0]; ?>" alt="">
-									<?php } ?>
-									</a>
+                                <img src="<?php echo get_field('sp-samuneiru'); ?>" alt="">
+							</a>
 						</li>
 					<?php
                             } ?>
-							<li class="photos pc-img odd photos-hover my-effect">
-								<button id="moreLoad">もっと読みこむ</button>
+							<li class="photos photos-thumbnail moreLoad" id="moreLoad__artist">
+								<button value="artist" class="moreLoadButton" id="moreLoadButton__artist"><span class="moreLoadButton__text">CLICK<br>FOR MORE</span></button>
 							</li>
 						</ul>
 						<?php
@@ -70,14 +61,14 @@
 </div>
 						<section class="photos photos-background-color photos-subhead" id="other">
 							<div class="inner photos">
-							<h2 class="photos lowpage_h2__second-category">other</h2>
+							<h2 class="photos my-effect lowpage_h2__second-category">other</h2>
 							<div class="photos-inner__second-category">
 								<?php
 
                                 // The Query
                                 $args = array(
                                     'post_type' => 'post',
-                                    'posts_per_page' => -1,
+                                    'posts_per_page' => 7,
                                     'no_found_rows' => true,  //ページャーを使う時はfalseに。
                                     'category_name' => 'other'
                                     //論理和：カテゴリースラッグで指定
@@ -86,20 +77,16 @@
 
                                 // The Loop
                                 if ($the_query->have_posts()) {
-                                    ?><ul class="photos-thumbnail">
+                                    ?><ul class="photos-thumbnail" id="other-list">
 								<?php while ($the_query->have_posts()) {
                                         $the_query->the_post(); ?>
 								<!--PC-->
 
-								<li class="photos pc-img odd photos-hover my-effect">
-									<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-pc">
-									<span class="cover"></span>
-									<?php
-                                        //画像(返り値は「画像ID」)
-                                        $img = get_field('pc-thumbnail');
-                                        $imgurl = wp_get_attachment_image_src($img, 'full'); //サイズは自由に変更してね
-                                        if ($imgurl) { ?><img src="<?php echo $imgurl[0]; ?>" alt=""></a>
-										<?php } ?>
+								<li class="photos pc-img photos-hover my-effect">
+									<a href=" <?php echo get_the_post_thumbnail_url()?>" class="zoomin" data-gall="artist-pc">
+										<span class="cover"></span>
+										<img src="<?php echo get_field('pc-thumbnail'); ?>" alt="">
+									</a>
 									<div class="view-more">
 										<p class="view-more__sentense">view more</p>
 									</div>
@@ -107,16 +94,14 @@
 								<!--SP-->
 								<li class="photos sp-img photos-thumbnail my-effect">
 									<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-sp">
-										<?php
-                                            //画像(返り値は「画像ID」)
-                                            $img = get_field('sp-samuneiru');
-                                        $imgurl = wp_get_attachment_image_src($img, 'full'); //サイズは自由に変更してね
-                                        if ($imgurl) { ?><img src="<?php echo $imgurl[0]; ?>" alt="">
-											<?php } ?>
-											</a>
+										<img src="<?php echo get_field('sp-samuneiru'); ?>" alt="">
+									</a>
 								</li>
 							<?php
                                     } ?>
+									<li class="photos photos-thumbnail my-effect moreLoad" id="moreLoad__other">
+										<button value="other" class="moreLoadButton" id="moreLoadButton__other"><span class="moreLoadButton__text">CLICK<br>FOR MORE</span></button>
+									</li>
 								</ul>
 								<?php
                                 /* Restore original Post Data */
@@ -147,7 +132,6 @@
 	<!--//main-->
 
 
-
 	<!--footer-->
 	<footer class="footer-lowpage inner">
 		<div class="inner">
@@ -155,16 +139,6 @@
 		</div>
 	</footer>
 	<!--//footer-->
-	<script>
-		var ua = navigator.userAgent;
-		if ((ua.indexOf('iPhone') > 0) || ua.indexOf('iPod') > 0 || (ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0)) {
-			// スマホのとき
-			$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />');
-		}else{
-			// PC・タブレットのとき
-			$('head').prepend('<meta name="viewport" content="width=1200" />');
-		}
-</script>
 
 <script type="text/javascript">
 $(function(){
@@ -180,38 +154,32 @@ $(function(){
 </script>
 
 <script src="<?php echo get_template_directory_uri(); ?>/js/venobox.min.js"></script>
-<script>
-	$(function() {
-		$('.zoomin').venobox({
-			infinigall: true,
-			numeratio: false,
-			arrowsColor: '#FFFFFF',
-			closeBackground: 'rgba(255,255,255,0.1)',
-			closeColor: '#B0BBD0',
-			bgcolor:  '#FFFFFF',
-			overlayColor: 'rgba(255,255,255,0.95)',
-			spinColor: '#09898D',
-			spinner: 'wandering-cubes',
-		});
-	});
-</script>
-
 
 <script>
-// ユーザーエージェントの判別
 var userAgent = navigator.userAgent;
-
+let isMobile = false
 // スマートフォンの場合はorientationchangeイベントを監視する
-if (userAgent.indexOf("iPhone") >= 0 || userAgent.indexOf("iPad") >= 0 || userAgent.indexOf("Android") >= 0)
-window.addEventListener("orientationchange", resizeHandler);
-else
-window.addEventListener("resize", resizeHandler);
+if (userAgent.indexOf("iPhone") >= 0 || userAgent.indexOf("iPad") >= 0 || userAgent.indexOf("Android") >= 0) {
+	isMobile = true
+}
+
+if(isMobile) {
+	window.addEventListener("orientationchange", resizeHandler);
+	$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />');
+	$('.moreLoadButton__text').html('TAP<br class="button__br">FOR MORE')
+} else {
+	window.addEventListener("resize", resizeHandler);
+	$('head').prepend('<meta name="viewport" content="width=1200" />');
+	$('.moreLoadButton__text').html('CLICK<br>FOR MORE')
+	$('.sp-img').remove()
+}
 
 function resizeHandler() {
 }
 </script>
 
-<script src="<?php echo get_template_directory_uri(); ?>/js/style.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.0.1/dist/gsap.min.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/moreLoad.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/script.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/photos.js"></script>
 
