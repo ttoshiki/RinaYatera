@@ -16,6 +16,7 @@ if ( 'POST' != $_SERVER['REQUEST_METHOD'] ) {
 	header( 'Content-Type: text/plain' );
 	exit;
 }
+
 /** Sets up the WordPress Environment. */
 require( dirname( __FILE__ ) . '/wp-load.php' );
 
@@ -78,4 +79,3 @@ $location = apply_filters( 'comment_post_redirect', $location, $comment );
 
 wp_safe_redirect( $location );
 exit;
-

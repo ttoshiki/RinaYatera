@@ -1224,11 +1224,6 @@ br.button__br {
     overflow: hidden;
   }
 
-	.nav-list{
-		display: flex;
-		justify-content: space-between;
-		width: 100%;
-
   .header-nav {
     display: block;
     position: relative;
@@ -1237,6 +1232,10 @@ br.button__br {
     background-color: transparent;
   }
 
+  .nav-list {
+    display: flex;
+    justify-content: space-between;
+  }
   .nav-background {
     background-color: transparent;
   }
@@ -1272,15 +1271,9 @@ br.button__br {
     position: absolute;
   }
 
-
-	.sub-menu{
-	display: none;
-	background: rgba(247,248,248,0.7);
-	-webkit-background: rgba(247,248,248,0.7);
-	-ms-background: rgba(247,248,248,0.7);
-	padding: 15px 0 15px 0;
-	width: 120px;
-	margin: 5px 0 0 0;
+  .works.nav-list__secondlevel {
+    width: 130px;
+  }
 
   .nav-current {
     border-bottom: solid 3px #09898d;
@@ -1288,16 +1281,6 @@ br.button__br {
     height: 20px;
   }
 
-
-	.nav-list__parent:hover>.sub-menu{
-		display: block;
-		position: absolute;
-	}
-
-	.works.sub-menu{
-		width: 130px;
-	}
-    
   .nav-current_sub {
     border-bottom: solid 3px #09898d;
     padding-bottom: 3px;
@@ -1340,17 +1323,6 @@ br.button__br {
     text-transform: uppercase;
   }
 
-	.current-menu-item>a{
-		border-bottom: solid 3px #09898d;
-		padding-bottom: 3px;
-		height: 20px;
-		margin-right: -0.2em;
-	}
-
-	.nav-current_sub{
-		border-bottom: solid 3px #09898d;
-		padding-bottom: 3px;
-	}
   /*---------------
 	about
 	----------------*/
