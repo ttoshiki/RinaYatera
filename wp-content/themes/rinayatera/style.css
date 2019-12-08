@@ -1195,7 +1195,7 @@ br.button__br {
     margin-bottom: 10px;
   }
 
-  .sub-menu > .current-menu-item :first-child{
+  .sub-menu > .current-menu-item:first-child{
     margin-bottom: 10px;
   }
 
