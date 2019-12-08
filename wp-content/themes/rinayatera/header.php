@@ -73,7 +73,7 @@
             <ul class="nav-list">
             <?php 
                 wp_nav_menu( array( 
-                  'theme_location' => 'grobal_navugation',
+                  'theme_location' => 'grobal_navigation',
                   'menu_class' => 'nav-list',
                   'container' => false,
                   'echo' => true,

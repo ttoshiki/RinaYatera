@@ -14,7 +14,7 @@ function my_theme_url($atts)
 add_shortcode('theme_url', 'my_theme_url');
 
 register_nav_menus(array(
-    'grobal_navugation' => 'グローバルナビゲーション',
+    'grobal_navigation' => 'グローバルナビゲーション',
 ));
 
 add_filter('acf/settings/remove_wp_meta_box', '__return_false');
