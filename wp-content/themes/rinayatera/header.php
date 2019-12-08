@@ -74,10 +74,10 @@
             <?php 
                 wp_nav_menu( array( 
                   'theme_location' => 'grobal_navugation',
-                  'menu_class'      => 'nav-list',
-                  'container'       => false,
-                  'echo'            => true,
-                  'depth'           => 0,
+                  'menu_class' => 'nav-list',
+                  'container' => false,
+                  'echo' => true,
+                  'depth' => 0,
                   'link_before' => '<span>',
                   'link_after' => '</span>'
                 ) ); 
