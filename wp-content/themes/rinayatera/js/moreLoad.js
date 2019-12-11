@@ -2,6 +2,7 @@ const VBOX_PRELOAD_IMAGE = '<div class="vbox-preloader"><div class="sk-wandering
 const EVEN_TRANSITION_SPEED = 1600;
 const ODD_TRANTISION_SPEED = 800;
 const FADE_IN_SPEED = 10
+let lastLine = 5
 let buttonHtml = null
 let artistNowPostNum = 7
 let artistGetPostNum = 8
@@ -150,13 +151,25 @@ let addPhotosDom = function() {
     }
     $.each(rangeToRoad, function(i, item) {
         let outputHtml = ''
+        console.log(lastLine)
         if(isMobile) {
             thumbnailUrl = item['acf']['sp-samuneiru']
-            outputHtml = '<li class="photos sp-img photos-hover addDom"><a href="' + thumbnailUrl + '" class="zoomin" data-gall="artist-sp">'
+            if(lastLine && (category === 'artist' || category === 'wedding')) {
+                outputHtml = '<li class="photos sp-img photos-hover addDom"><a href="' + thumbnailUrl + '" class="zoomin" data-gall="artist-sp">'
+            } else {
+                console.log('lastだよ')
+                outputHtml = '<li class="photos sp-img photos-hover last addDom"><a href="' + thumbnailUrl + '" class="zoomin" data-gall="artist-sp">'
+            }
         } else {
             thumbnailUrl = item['acf']['pc-thumbnail']
             pcVboxImage = item['_embedded']['wp:featuredmedia']['0']['media_details']['sizes']['full']['source_url']
-            outputHtml = '<li class="photos pc-img photos-hover addDom"><a href="' + pcVboxImage + '" class="zoomin" data-gall="artist-pc">'
+            console.log(category)
+            if(lastLine || category === 'other' || category === 'family') {
+                outputHtml = '<li class="photos pc-img photos-hover addDom"><a href="' + pcVboxImage + '" class="zoomin" data-gall="artist-pc">'
+            } else {
+                console.log('lastだよ')
+                outputHtml = '<li class="photos pc-img photos-hover last addDom"><a href="' + pcVboxImage + '" class="zoomin" data-gall="artist-pc">'
+            }
         }
         outputHtml += `<span class="cover"></span>`
         outputHtml += '<img src="' + thumbnailUrl + '" alt=""></a>'
@@ -174,6 +187,9 @@ let addPhotosDom = function() {
             case 'family':
                 $(outputHtml).appendTo("#family-list").hide()
                 break
+        }
+        if(lastLine > 0) {
+            lastLine -= 1
         }
     });
     $('.addDom:even').css({ position: 'relative', top: 20, opacity: 0, transition: EVEN_TRANSITION_SPEED + 'ms'}).addClass('even');
@@ -264,6 +280,8 @@ let addForMoreButton = function() {
 
 // 追加したDomにはクリックイベントが発生しないので親要素のphotos-thumbnailを指定
 $('.photos-thumbnail').on('click', '.moreLoad', function() {
+    lastLine = 5 // 初期値に
+    $('.last').toggleClass('last')
     $('.moreLoadButton__text', this).text('LOADING')
     $('.moreLoadButton__text', this).append(VBOX_PRELOAD_IMAGE)
     $('.moreLoadButton', this).prop("disabled", true)

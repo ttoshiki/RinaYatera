@@ -9,7 +9,6 @@
 			<p class="title_background works">works</p>
 			<h2 class="photos lowpage_h2">wedding</h2>
 				<section class="photos-h2__parents" id="wedding">
-
 					<div class="photos-inner">
 					<?php
 
@@ -22,14 +21,20 @@
                             //論理和：カテゴリースラッグで指定
                         );
                         $the_query = new WP_Query($args);
+                        $number_of_last_line = 3;
 
                         // The Loop
                         if ($the_query->have_posts()) {
                             ?><ul class="photos-thumbnail" id="wedding-list">
 						<?php while ($the_query->have_posts()) {
                                 $the_query->the_post(); ?>
-						<!--PC-->
+
+						<?php if ($number_of_last_line > 0) { ?>
 						<li class="photos pc-img photos-hover">
+						<?php } else { ?>
+						<li class="photos pc-img photos-hover last">
+						<?php } ?>
+						<!--PC-->
 							<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="wedding-pc">
 								<span class="cover"></span>
 								<img src="<?php echo get_field('pc-thumbnail'); ?>" alt="">
@@ -44,9 +49,12 @@
                                 <img src="<?php echo get_field('sp-samuneiru'); ?>" alt="">
 							</a>
 						</li>
-					<?php
+							<?php
+                                if ($number_of_last_line > 0) {
+                                    --$number_of_last_line;
+                                }
                             } ?>
-							<li class="photos photos-thumbnail moreLoad" id="moreLoad__wedding">
+							<li class="photos photos-thumbnail moreLoad last" id="moreLoad__wedding">
 								<button value="wedding" class="moreLoadButton" id="moreLoadButton__wedding"><span class="moreLoadButton__text">CLICK<br>FOR MORE</span></button>
 							</li>
 						</ul>
@@ -63,7 +71,7 @@
 </div>
 						<section class="photos photos-background-color photos-subhead" id="family">
 							<div class="inner photos">
-							<h2 class="photos my-effect lowpage_h2__second-category">family</h2>
+							<h2 class="photos lowpage_h2__second-category family sticky">family</h2>
 							<div class="photos-inner__second-category">
 								<?php
 

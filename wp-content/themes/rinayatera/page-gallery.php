@@ -20,6 +20,7 @@
                             //論理和：カテゴリースラッグで指定
                         );
                         $the_query = new WP_Query($args);
+                        $number_of_last_line = 3;
 
                         // The Loop
                         if ($the_query->have_posts()) {
@@ -27,7 +28,11 @@
 						<?php while ($the_query->have_posts()) {
                                 $the_query->the_post(); ?>
 						<!--PC-->
+						<?php if ($number_of_last_line > 0) { ?>
 						<li class="photos pc-img photos-hover">
+						<?php } else { ?>
+						<li class="photos pc-img photos-hover last">
+						<?php } ?>
 							<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-pc">
 								<span class="cover"></span>
 								<img src="<?php echo get_field('pc-thumbnail'); ?>" alt="">
@@ -42,16 +47,19 @@
                                 <img src="<?php echo get_field('sp-samuneiru'); ?>" alt="">
 							</a>
 						</li>
-					<?php
+							<?php
+                                if ($number_of_last_line > 0) {
+                                    --$number_of_last_line;
+                                }
                             } ?>
-							<li class="photos photos-thumbnail moreLoad" id="moreLoad__artist">
+							<li class="photos photos-thumbnail moreLoad last" id="moreLoad__artist">
 								<button value="artist" class="moreLoadButton" id="moreLoadButton__artist"><span class="moreLoadButton__text">CLICK<br>FOR MORE</span></button>
 							</li>
 						</ul>
 						<?php
-                        /* Restore original Post Data */
+                            /* Restore original Post Data */
 
-                        wp_reset_postdata();
+                            wp_reset_postdata();
                         } else {
                             // no posts found
                         }
@@ -61,7 +69,7 @@
 </div>
 						<section class="photos photos-background-color photos-subhead" id="other">
 							<div class="inner photos">
-							<h2 class="photos my-effect lowpage_h2__second-category">other</h2>
+							<h2 class="photos lowpage_h2__second-category">other</h2>
 							<div class="photos-inner__second-category">
 								<?php
 

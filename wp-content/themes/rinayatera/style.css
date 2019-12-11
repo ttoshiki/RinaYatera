@@ -989,6 +989,10 @@ veno box
   max-width: 50%;
 }
 
+.moreLoad.last {
+  margin-bottom: 0;
+}
+
 button.moreLoadButton {
   display: flex;
   justify-content: center;
