@@ -1,22 +1,22 @@
 const VBOX_PRELOAD_IMAGE = '<div class="vbox-preloader"><div class="sk-wandering-cubes -gallery"><div class="sk-cube sk-cube1 -gallery" style="background-color: rgb(9, 137, 141);"></div><div class="sk-cube sk-cube2 -gallery" style="background-color: rgb(9, 137, 141);"></div></div></div>'
 const EVEN_TRANSITION_SPEED = 1600;
 const ODD_TRANTISION_SPEED = 800;
-const FADE_IN_SPEED = 50
+const FADE_IN_SPEED = 10
 let buttonHtml = null
 let artistNowPostNum = 7
-let artistGetPostNum = 4
+let artistGetPostNum = 8
 let artistTotalPostNum = artistNowPostNum + artistGetPostNum
 
 let otherNowPostNum = 7
-let otherGetPostNum = 4
+let otherGetPostNum = 8
 let otherTotalPostNum = otherNowPostNum + otherGetPostNum
 
 let weddingNowPostNum = 7
-let weddingGetPostNum = 4
+let weddingGetPostNum = 8
 let weddingTotalPostNum = weddingNowPostNum + weddingGetPostNum
 
 let familyNowPostNum = 7
-let familyGetPostNum = 4
+let familyGetPostNum = 8
 let familyTotalPostNum = familyNowPostNum + familyGetPostNum
 
 let isArtistFirst = true
@@ -102,7 +102,7 @@ let addPhotosDom = function() {
             break
     }
     let addDomAnimation = new TimelineMax()
-    const LIST_OPACITY_SPEED = 0.2
+    const LIST_OPACITY_SPEED = 0.01
     const BUTTON_FADEOUT_SPEED = 0.01
     switch(category) {
         case 'artist':
@@ -179,29 +179,30 @@ let addPhotosDom = function() {
     $('.addDom:even').css({ position: 'relative', top: 20, opacity: 0, transition: EVEN_TRANSITION_SPEED + 'ms'}).addClass('even');
     $('.addDom:odd').css({ position: 'relative', top: 20, opacity: 0, transition: ODD_TRANTISION_SPEED + 'ms'}).addClass('odd');
     function fadeIn() {
-        $('.addDom').fadeIn(FADE_IN_SPEED).delay(1000).animate({
+        const FADE_OUT_SPEED = 150
+        $('.addDom').fadeIn(FADE_IN_SPEED).delay(500).animate({
             top: 0,
             opacity: 1
         },100).toggleClass('addDom')
         switch (category) {
             case 'artist':
-                $('#moreLoad__artist').fadeOut(150, function() { $(this).remove(); })
-                $('#moreLoadButton__artist').fadeOut(150, function() { $(this).remove(); })
+                $('#moreLoad__artist').fadeOut(FADE_OUT_SPEED, function() { $(this).remove(); })
+                $('#moreLoadButton__artist').fadeOut(FADE_OUT_SPEED, function() { $(this).remove(); })
                  break
 
             case 'other':
-                $('#moreLoad__other').fadeOut(150, function() { $(this).remove(); })
-                $('#moreLoadButton__other').fadeOut(150, function() { $(this).remove(); })
+                $('#moreLoad__other').fadeOut(FADE_OUT_SPEED, function() { $(this).remove(); })
+                $('#moreLoadButton__other').fadeOut(FADE_OUT_SPEED, function() { $(this).remove(); })
                 break
 
             case 'wedding':
-                $('#moreLoad__wedding').fadeOut(150, function() { $(this).remove(); })
-                $('#moreLoadButton__wedding').fadeOut(150, function() { $(this).remove(); })
+                $('#moreLoad__wedding').fadeOut(FADE_OUT_SPEED, function() { $(this).remove(); })
+                $('#moreLoadButton__wedding').fadeOut(FADE_OUT_SPEED, function() { $(this).remove(); })
                 break
 
             case 'family':
-                $('#moreLoad__family').fadeOut(150, function() { $(this).remove(); })
-                $('#moreLoadButton__family').fadeOut(150, function() { $(this).remove(); })
+                $('#moreLoad__family').fadeOut(FADE_OUT_SPEED, function() { $(this).remove(); })
+                $('#moreLoadButton__family').fadeOut(FADE_OUT_SPEED, function() { $(this).remove(); })
                 break
         }
     }
@@ -216,9 +217,9 @@ let addForMoreButton = function() {
             $(buttonHtml).appendTo("#artist-list").fadeOut(0)
             addButtonAnimation.to('#moreLoad__artist', 0.1, {
                 position: 'relative', top: 20, opacity: 0, transition: EVEN_TRANSITION_SPEED + 'ms'
-            }).to('#moreLoad__artist', 0.45, {
-                opacity: 1,
+            }).to('#moreLoad__artist', 1, {
                 delay: 0.5,
+                opacity: 1,
                 top: 0
             })
             break
@@ -228,9 +229,9 @@ let addForMoreButton = function() {
             $(buttonHtml).appendTo("#other-list").fadeOut(0)
             addButtonAnimation.to('#moreLoad__other', 0.1, {
                 position: 'relative', top: 20, opacity: 0, transition: EVEN_TRANSITION_SPEED + 'ms'
-            }).to('#moreLoad__other', 0.45, {
-                opacity: 1,
+            }).to('#moreLoad__other', 1, {
                 delay: 0.5,
+                opacity: 1,
                 top: 0
             })
             break
@@ -240,9 +241,9 @@ let addForMoreButton = function() {
             $(buttonHtml).appendTo("#wedding-list").fadeOut(0)
             addButtonAnimation.to('#moreLoad__wedding', 0.1, {
                 position: 'relative', top: 20, opacity: 0, transition: EVEN_TRANSITION_SPEED + 'ms'
-            }).to('#moreLoad__wedding', 0.45, {
-                opacity: 1,
+            }).to('#moreLoad__wedding', 1, {
                 delay: 0.5,
+                opacity: 1,
                 top: 0
             })
             break
@@ -252,9 +253,9 @@ let addForMoreButton = function() {
             $(buttonHtml).appendTo("#family-list").fadeOut(0)
             addButtonAnimation.to('#moreLoad__family', 0.1, {
                 position: 'relative', top: 20, opacity: 0, transition: EVEN_TRANSITION_SPEED + 'ms'
-            }).to('#moreLoad__family', 0.45, {
-                opacity: 1,
+            }).to('#moreLoad__family', 1, {
                 delay: 0.5,
+                opacity: 1,
                 top: 0
             })
             break
@@ -263,7 +264,6 @@ let addForMoreButton = function() {
 
 // 追加したDomにはクリックイベントが発生しないので親要素のphotos-thumbnailを指定
 $('.photos-thumbnail').on('click', '.moreLoad', function() {
-    console.log($('.moreLoadButton', this)[0]['value'])
     $('.moreLoadButton__text', this).text('LOADING')
     $('.moreLoadButton__text', this).append(VBOX_PRELOAD_IMAGE)
     $('.moreLoadButton', this).prop("disabled", true)
@@ -302,9 +302,6 @@ $('.photos-thumbnail').on('click', '.moreLoad', function() {
                 })
             } else {
                 addPhotosDom()
-                console.log('artistNowPostNum', artistNowPostNum)
-                console.log('artistTotalPostNum', artistTotalPostNum)
-                console.log('getJSONResult.length', artistGetJSONResults.length)
                 if(artistTotalPostNum + 1 < artistGetJSONResults.length) {
                     addForMoreButton()
                     artistNowPostNum += artistGetPostNum
@@ -325,9 +322,6 @@ $('.photos-thumbnail').on('click', '.moreLoad', function() {
                 })
             } else {
                 addPhotosDom()
-                console.log('otherNowPostNum', otherNowPostNum)
-                console.log('otherTotalPostNum', otherTotalPostNum)
-                console.log('getJSONResult.length', otherGetJSONResults.length)
                 if(otherTotalPostNum + 1 < otherGetJSONResults.length) {
                     addForMoreButton()
                     otherNowPostNum += otherGetPostNum
@@ -348,9 +342,6 @@ $('.photos-thumbnail').on('click', '.moreLoad', function() {
                 })
             } else {
                 addPhotosDom()
-                console.log('weddingNowPostNum', weddingNowPostNum)
-                console.log('weddingTotalPostNum', weddingTotalPostNum)
-                console.log('getJSONResult.length', weddingGetJSONResults.length)
                 if(weddingTotalPostNum + 1 < weddingGetJSONResults.length) {
                     addForMoreButton()
                     weddingNowPostNum += weddingGetPostNum
@@ -371,9 +362,6 @@ $('.photos-thumbnail').on('click', '.moreLoad', function() {
                 })
             } else {
                 addPhotosDom()
-                console.log('familyNowPostNum', familyNowPostNum)
-                console.log('familyTotalPostNum', familyTotalPostNum)
-                console.log('getJSONResult.length', familyGetJSONResults.length)
                 if(familyTotalPostNum + 1 < familyGetJSONResults.length) {
                     addForMoreButton()
                     familyNowPostNum += familyGetPostNum
