@@ -149,6 +149,7 @@ let addPhotosDom = function() {
             })
             break
     }
+    $('.last').toggleClass('last')
     $.each(rangeToRoad, function(i, item) {
         let outputHtml = ''
         if(isMobile) {
@@ -277,7 +278,6 @@ let addForMoreButton = function() {
 // 追加したDomにはクリックイベントが発生しないので親要素のphotos-thumbnailを指定
 $('.photos-thumbnail').on('click', '.moreLoad', function() {
     NumberOfLastLine = 5 // 初期値に
-    $('.last').toggleClass('last')
     $('.moreLoadButton__text', this).text('LOADING')
     $('.moreLoadButton__text', this).append(VBOX_PRELOAD_IMAGE)
     $('.moreLoadButton', this).prop("disabled", true)
