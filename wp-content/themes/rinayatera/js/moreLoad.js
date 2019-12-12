@@ -149,7 +149,10 @@ let addPhotosDom = function() {
             })
             break
     }
-    $('.last').toggleClass('last')
+    console.log(category)
+    if( category === 'artist' || category === 'wedding' ) {
+        $('.last').toggleClass('last')
+    }
     $.each(rangeToRoad, function(i, item) {
         let outputHtml = ''
         if(isMobile) {
