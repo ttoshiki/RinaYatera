@@ -128,7 +128,7 @@
 						<h3 class="go-to-plan">詳しい撮影プランはコチラ</h3>
 
 						<div class="go-to-plan_btn__outer">
-							<a href="../plan/index.html#plan-portrait" class="go-to-plan_btn__sentense">see more details</a>
+							<a href="#plan-portrait" class="go-to-plan_btn__sentense">see more details</a>
 						</div>
 
 					</div>
