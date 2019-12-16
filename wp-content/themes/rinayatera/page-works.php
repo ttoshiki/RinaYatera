@@ -21,7 +21,7 @@
                             //論理和：カテゴリースラッグで指定
                         );
                         $the_query = new WP_Query($args);
-                        $number_of_last_line = 3;
+                        $number_of_last_line = 4;
 
                         // The Loop
                         if ($the_query->have_posts()) {
