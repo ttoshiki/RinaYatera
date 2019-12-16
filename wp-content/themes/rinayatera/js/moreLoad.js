@@ -173,7 +173,9 @@ let addPhotosDom = function() {
         }
         outputHtml += `<span class="cover"></span>`
         outputHtml += '<img src="' + thumbnailUrl + '" alt=""></a>'
-        outputHtml += '<div class="view-more"><p class="view-more__sentense">view more</p></div></li>'
+        if(!isMobile) {
+            outputHtml += '<div class="view-more"><p class="view-more__sentense">view more</p></div></li>'
+        }
         switch (category) {
             case 'artist':
                 $(outputHtml).appendTo("#artist-list").hide()
