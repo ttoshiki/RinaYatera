@@ -155,20 +155,21 @@ let addPhotosDom = function() {
     }
     $.each(rangeToRoad, function(i, item) {
         let outputHtml = ''
+        vboxImage = item['_embedded']['wp:featuredmedia']['0']['media_details']['sizes']['full']['source_url']
         if(isMobile) {
+            console.log(item)
             thumbnailUrl = item['acf']['sp-samuneiru']
             if(NumberOfLastLine && (category === 'artist' || category === 'wedding')) {
-                outputHtml = '<li class="photos sp-img photos-hover addDom"><a href="' + thumbnailUrl + '" class="zoomin" data-gall="artist-sp">'
+                outputHtml = '<li class="photos sp-img photos-hover addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="artist-sp">'
             } else {
-                outputHtml = '<li class="photos sp-img photos-hover last addDom"><a href="' + thumbnailUrl + '" class="zoomin" data-gall="artist-sp">'
+                outputHtml = '<li class="photos sp-img photos-hover last addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="artist-sp">'
             }
         } else {
             thumbnailUrl = item['acf']['pc-thumbnail']
-            pcVboxImage = item['_embedded']['wp:featuredmedia']['0']['media_details']['sizes']['full']['source_url']
             if(NumberOfLastLine || category === 'other' || category === 'family') {
-                outputHtml = '<li class="photos pc-img photos-hover addDom"><a href="' + pcVboxImage + '" class="zoomin" data-gall="artist-pc">'
+                outputHtml = '<li class="photos pc-img photos-hover addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="artist-pc">'
             } else {
-                outputHtml = '<li class="photos pc-img photos-hover last addDom"><a href="' + pcVboxImage + '" class="zoomin" data-gall="artist-pc">'
+                outputHtml = '<li class="photos pc-img photos-hover last addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="artist-pc">'
             }
         }
         outputHtml += `<span class="cover"></span>`
