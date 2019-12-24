@@ -149,7 +149,6 @@ let addPhotosDom = function() {
             })
             break
     }
-    console.log(category)
     if( category === 'artist' || category === 'wedding' ) {
         $('.last').toggleClass('last')
     }
@@ -157,19 +156,46 @@ let addPhotosDom = function() {
         let outputHtml = ''
         vboxImage = item['_embedded']['wp:featuredmedia']['0']['media_details']['sizes']['full']['source_url']
         if(isMobile) {
-            console.log(item)
             thumbnailUrl = item['acf']['sp-samuneiru']
             if(NumberOfLastLine && (category === 'artist' || category === 'wedding')) {
-                outputHtml = '<li class="photos sp-img photos-hover addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="artist-sp">'
+                switch(category) {
+                    case 'artist':
+                        outputHtml = '<li class="photos sp-img photos-hover addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="artist-sp">'
+                        break
+                    case 'wedding':
+                        outputHtml = '<li class="photos sp-img photos-hover addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="wedding-sp">'
+                        break
+                }
             } else {
-                outputHtml = '<li class="photos sp-img photos-hover last addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="artist-sp">'
+                switch(category) {
+                    case 'other':
+                        outputHtml = '<li class="photos sp-img photos-hover last addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="other-sp">'
+                        break
+                    case 'family':
+                        outputHtml = '<li class="photos sp-img photos-hover last addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="family-sp">'
+                        break
+                }
             }
         } else {
             thumbnailUrl = item['acf']['pc-thumbnail']
             if(NumberOfLastLine || category === 'other' || category === 'family') {
-                outputHtml = '<li class="photos pc-img photos-hover addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="artist-pc">'
+                switch(category) {
+                    case 'other':
+                        outputHtml = '<li class="photos pc-img photos-hover addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="other-pc">'
+                        break
+                    case 'family':
+                        outputHtml = '<li class="photos pc-img photos-hover addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="family-pc">'
+                        break
+                }
             } else {
-                outputHtml = '<li class="photos pc-img photos-hover last addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="artist-pc">'
+                switch(category) {
+                    case 'artist':
+                        outputHtml = '<li class="photos pc-img photos-hover last addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="artist-pc">'
+                        break
+                    case 'wedding':
+                        outputHtml = '<li class="photos pc-img photos-hover last addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="wedding-pc">'
+                        break
+                }
             }
         }
         outputHtml += `<span class="cover"></span>`

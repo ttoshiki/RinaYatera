@@ -10,7 +10,6 @@
 				<section class="photos-h2__parents" id="artist">
 					<div class="photos-inner">
 						<?php
-
                         // The Query
                         $args = array(
                             'post_type' => 'post',
@@ -91,7 +90,7 @@
 								<!--PC-->
 
 								<li class="photos pc-img photos-hover my-effect">
-									<a href=" <?php echo get_the_post_thumbnail_url()?>" class="zoomin" data-gall="artist-pc">
+									<a href=" <?php echo get_the_post_thumbnail_url()?>" class="zoomin" data-gall="other-pc">
 										<span class="cover"></span>
 										<img src="<?php echo get_field('pc-thumbnail'); ?>" alt="">
 									</a>
@@ -101,7 +100,7 @@
 								</li>
 								<!--SP-->
 								<li class="photos sp-img photos-thumbnail my-effect">
-									<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="artist-sp">
+									<a href=" <?php echo get_the_post_thumbnail_url()?> " class="zoomin" data-gall="other-sp">
 										<img src="<?php echo get_field('sp-samuneiru'); ?>" alt="">
 									</a>
 								</li>
