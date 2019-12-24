@@ -161,15 +161,19 @@ let addPhotosDom = function() {
                 switch(category) {
                     case 'artist':
                         outputHtml = '<li class="photos sp-img photos-hover addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="artist-sp">'
+                        break
                     case 'wedding':
                         outputHtml = '<li class="photos sp-img photos-hover addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="wedding-sp">'
+                        break
                 }
             } else {
                 switch(category) {
                     case 'other':
                         outputHtml = '<li class="photos sp-img photos-hover last addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="other-sp">'
+                        break
                     case 'family':
                         outputHtml = '<li class="photos sp-img photos-hover last addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="family-sp">'
+                        break
                 }
             }
         } else {
@@ -178,17 +182,19 @@ let addPhotosDom = function() {
                 switch(category) {
                     case 'other':
                         outputHtml = '<li class="photos pc-img photos-hover addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="other-pc">'
+                        break
                     case 'family':
                         outputHtml = '<li class="photos pc-img photos-hover addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="family-pc">'
+                        break
                 }
             } else {
-                console.log(category)
                 switch(category) {
                     case 'artist':
                         outputHtml = '<li class="photos pc-img photos-hover last addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="artist-pc">'
+                        break
                     case 'wedding':
-                        console.log('a')
                         outputHtml = '<li class="photos pc-img photos-hover last addDom"><a href="' + vboxImage + '" class="zoomin" data-gall="wedding-pc">'
+                        break
                 }
             }
         }
